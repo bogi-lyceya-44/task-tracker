@@ -62,7 +62,7 @@ bin-deps: .bin-deps
 	rm -rf ./bin
 	mkdir -p ./bin
 
-generate: bin-deps .generate .generate-mocks build
+generate: bin-deps .generate
 fast-generate: .generate
 
 .generate:

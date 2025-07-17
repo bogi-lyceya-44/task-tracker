@@ -13,6 +13,9 @@ deps:
   - github.com/googleapis/googleapis
   - github.com/bufbuild/protoc-gen-validate
 generate:
+  generate:
+    inputs:
+      - directory: ./api
   plugins:
     - name: go
       out: ./generated

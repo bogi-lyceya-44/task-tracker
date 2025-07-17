@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+package task;
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/generated/api/task;task";
+
+message Task {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  string description = 3 [(validate.rules).string = {min_len: 1, max_len: 512}];
+
+  repeated int64 deps = 4 [(validate.rules).repeated.unique = true];
+
+  int32 priority = 5 [(validate.rules).int32 = {gte: 1, lte: 5}];
+
+  google.protobuf.Timestamp start = 6;
+
+  google.protobuf.Timestamp finish = 7;
+
+  google.protobuf.Timestamp created_at = 8;
+
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message CreateTaskRequest {
+  string name = 1 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  string description = 2 [(validate.rules).string = {min_len: 1, max_len: 512}];
+
+  repeated int64 deps = 3 [(validate.rules).repeated.unique = true];
+
+  int32 priority = 4 [(validate.rules).int32 = {gte: 1, lte: 5}];
+
+  google.protobuf.Timestamp start = 5;
+
+  google.protobuf.Timestamp finish = 6;
+}
+
+message CreateTaskResponse {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message UpdateTaskRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  string description = 3 [(validate.rules).string = {min_len: 1, max_len: 512}];
+
+  repeated int64 deps = 4 [(validate.rules).repeated.unique = true];
+
+  int32 priority = 5 [(validate.rules).int32 = {gte: 1, lte: 5}];
+
+  google.protobuf.Timestamp finish = 6;
+}
+
+message UpdateTaskResponse {
+  Task task = 1;
+}
+
+message DeleteTaskRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message DeleteTaskResponse {}
+
+message GetTaskRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message GetTaskResponse {
+  Task task = 1;
+}

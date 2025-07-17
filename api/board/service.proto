@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "api/board/model.proto";
+
+package board;
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/generated/api/board;board";
+
+service BoardService {
+  rpc CreateBoard(CreateBoardRequest) returns (CreateBoardResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/tracker/board"
+      body: "*"
+    };
+  }
+
+  rpc GetBoard(GetBoardRequest) returns (GetBoardResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/tracker/board/{id=*}"
+    };
+  }
+
+  rpc UpdateBoard(UpdateBoardRequest) returns (UpdateBoardResponse) {
+    option (google.api.http) = {
+      put: "/api/v1/tracker/board"
+      body: "*"
+    };
+  }
+
+  rpc DeleteBoard(DeleteBoardRequest) returns (DeleteBoardResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/tracker/board/{id=*}"
+    };
+  }
+}

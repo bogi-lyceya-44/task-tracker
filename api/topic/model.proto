@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+package topic;
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/generated/api/topic;topic";
+
+message Topic {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  repeated int64 taskIDs = 3 [(validate.rules).repeated.unique = true];
+
+  google.protobuf.Timestamp created_at = 4;
+
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message CreateTopicRequest {
+  string name = 1 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  repeated int64 taskIDs = 2 [(validate.rules).repeated.unique = true];
+}
+
+message CreateTopicResponse {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message UpdateTopicRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  repeated int64 taskIDs = 3 [(validate.rules).repeated.unique = true];
+}
+
+message UpdateTopicResponse {
+  Topic topic = 1;
+}
+
+message DeleteTopicRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message DeleteTopicResponse {}
+
+message GetTopicRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message GetTopicResponse {
+  Topic topic = 1;
+}

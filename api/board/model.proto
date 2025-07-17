@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+package board;
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/generated/api/board;board";
+
+message Board {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  repeated int64 topicIDs = 3 [(validate.rules).repeated.unique = true];
+
+  google.protobuf.Timestamp created_at = 4;
+
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message CreateBoardRequest {
+  string name = 1 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  repeated int64 topicIDs = 2 [(validate.rules).repeated.unique = true];
+}
+
+message CreateBoardResponse {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message UpdateBoardRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 64}];
+
+  repeated int64 topicIDs = 3 [(validate.rules).repeated.unique = true];
+}
+
+message UpdateBoardResponse {
+  Board board = 1;
+}
+
+message DeleteBoardRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message DeleteBoardResponse {}
+
+message GetBoardRequest {
+  int64 id = 1 [(validate.rules).int64.gte = 0];
+}
+
+message GetBoardResponse {
+  Board board = 1;
+}
