@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/boards;task_tracker_boards";
+
+package api.v1.task_tracker.boards;
+
+import "google/protobuf/timestamp.proto";
+
+message Board {
+    int64 id = 1;
+    string name = 2;
+    repeated int64 topic_ids = 3;
+
+    google.protobuf.Timestamp created_at = 4;
+    google.protobuf.Timestamp updated_at = 5;
+}

@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/tasks;task_tracker_tasks";
+
+package api.v1.task_tracker.tasks;
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "api/tasks/models.proto";
+
+service TaskService {
+    rpc GetTasks(GetTasksRequest) returns (GetTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_tasks"
+            body: "*"
+        };
+    }
+
+    rpc CreateTasks(CreateTasksRequest) returns (CreateTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/create_tasks"
+            body: "*"
+        };
+    }
+
+    rpc UpdateTasks(UpdateTasksRequest) returns (UpdateTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/update_tasks"
+            body: "*"
+        };
+    }
+
+    rpc DeleteTasks(DeleteTasksRequest) returns (DeleteTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/delete_tasks"
+            body: "*"
+        };
+    }
+}
+
+message GetTasksRequest {
+    repeated int64 ids = 1;
+}
+
+message GetTasksResponse {
+    repeated Task tasks = 1;
+}
+
+message CreateTasksRequest {
+    message TaskPrototype {
+        string name = 1;
+        string description = 2;
+        repeated int64 deps = 3;
+        Priority priority = 4;
+
+        google.protobuf.Timestamp start_time = 5;
+        google.protobuf.Timestamp finish_time = 6;
+    }
+
+    repeated TaskPrototype tasks_to_create = 1;
+}
+
+message CreateTasksResponse {
+    repeated int64 ids = 1;
+}
+
+message UpdateTasksRequest {
+    message TaskPrototype {
+        int64 id = 1;
+        string name = 2;
+        string description = 3;
+        repeated int64 deps = 4;
+        Priority priority = 5;
+
+        google.protobuf.Timestamp start_time = 6;
+        google.protobuf.Timestamp finish_time = 7;
+    }
+
+    repeated TaskPrototype tasks_to_update = 1;
+}
+
+message UpdateTasksResponse {}
+
+message DeleteTasksRequest {
+    repeated int64 ids = 1;
+}
+
+message DeleteTasksResponse {}

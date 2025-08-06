@@ -1,1 +1,7 @@
-.idea
+/bin
+/vendor.protogen
+/.idea
+
+/cover.out
+/cover.out.tmp
+.env
