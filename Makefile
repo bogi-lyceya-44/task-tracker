@@ -90,3 +90,8 @@ fast-generate: .generate
 
 	find . -iname "*.swagger.json" -print0 | xargs -0 $(LOCAL_BIN)/go-swagger-merger -o docs/swagger.json
 
+enum: .enum
+
+.enum:
+	go install github.com/abice/go-enum@latest
+	go generate ./...
