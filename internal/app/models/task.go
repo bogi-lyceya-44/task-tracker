@@ -15,3 +15,11 @@ type Task struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
+
+func (t Task) GetID() int64 {
+	return t.ID
+}
+
+func (t Task) GetDependencies() []int64 {
+	return t.Dependencies
+}

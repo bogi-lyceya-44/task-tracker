@@ -11,3 +11,11 @@ type UpdatedTask struct {
 	StartTime    *time.Time
 	FinishTime   *time.Time
 }
+
+func (t UpdatedTask) GetID() int64 {
+	return t.ID
+}
+
+func (t UpdatedTask) GetDependencies() []int64 {
+	return t.Dependencies
+}
