@@ -12,15 +12,19 @@ func (s *TaskService) InsertTasks(
 	ctx context.Context,
 	tasks []models.Task,
 ) ([]int64, error) {
-	if err := checkForSelfDependency(
-		utils.Map(
-			tasks,
-			func(task models.Task) idWithDependencies {
-				return idWithDependencies{task.ID, task.Dependencies}
-			},
-		),
-	); err != nil {
+	idsWithDependencies := utils.Map(
+		tasks,
+		func(task models.Task) idWithDependencies {
+			return idWithDependencies{task.ID, task.Dependencies}
+		},
+	)
+
+	if err := s.checkForSelfDependency(idsWithDependencies); err != nil {
 		return nil, errors.Wrap(err, "checking self dependency")
+	}
+
+	if err := s.checkForTaskDependencyExistence(ctx, idsWithDependencies); err != nil {
+		return nil, errors.Wrap(err, "checking task existence")
 	}
 
 	return s.storage.InsertTasks(ctx, tasks)
