@@ -30,7 +30,7 @@ func (s *TopicStorage) InsertTopics(
 	for _, topic := range topics {
 		builder = builder.Values(
 			topic.Name,
-			topic.TaskIDs,
+			topic.TaskIds,
 			now,
 			now,
 		)

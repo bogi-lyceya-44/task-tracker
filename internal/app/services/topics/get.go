@@ -10,5 +10,5 @@ func (s *TopicService) GetTopics(
 	ctx context.Context,
 	ids []int64,
 ) ([]models.Topic, error) {
-	return s.storage.GetTopics(ctx, ids)
+	return s.topicStorage.GetTopics(ctx, ids)
 }

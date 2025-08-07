@@ -41,7 +41,6 @@ linters-settings:
 linters:
   disable-all: true
   enable:
-    - revive
     - govet
     - errcheck
     - ineffassign
@@ -73,7 +72,6 @@ linters:
     - containedctx
     - perfsprint
     - prealloc
-    - protogetter
     - usetesting
     - testifylint
     - tparallel

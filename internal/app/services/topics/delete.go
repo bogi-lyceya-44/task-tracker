@@ -6,5 +6,5 @@ func (s *TopicService) DeleteTopics(
 	ctx context.Context,
 	ids []int64,
 ) error {
-	return s.storage.DeleteTopics(ctx, ids)
+	return s.topicStorage.DeleteTopics(ctx, ids)
 }

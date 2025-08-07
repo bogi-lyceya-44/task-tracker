@@ -2,7 +2,6 @@ package tasks
 
 import (
 	"context"
-	"fmt"
 	"slices"
 	"strconv"
 	"strings"
@@ -31,12 +30,10 @@ func (s *TaskService) checkForSelfDependency(pairs []idWithDependencies) error {
 			},
 		)
 
-		return errors.Wrap(
+		return errors.WithMessagef(
 			ErrSelfDependent,
-			fmt.Sprintf(
-				"found self dependent tasks: %v",
-				strings.Join(ids, ","),
-			),
+			"tasks: %v",
+			strings.Join(ids, ","),
 		)
 	}
 
@@ -45,12 +42,20 @@ func (s *TaskService) checkForSelfDependency(pairs []idWithDependencies) error {
 
 func (s *TaskService) checkForTaskDependencyExistence(
 	ctx context.Context,
-	pairs []idWithDependencies,
+	dependencies [][]int64,
 ) error {
-	idsMap := set.NewEmptyWithCapacity[int64](len(pairs))
+	totalSize := utils.Reduce(
+		dependencies,
+		func(accumulator int, value []int64) int {
+			return accumulator + len(value)
+		},
+		0,
+	)
 
-	for _, pair := range pairs {
-		idsMap.Add(pair.Second...)
+	idsMap := set.NewEmptyWithCapacity[int64](totalSize)
+
+	for _, deps := range dependencies {
+		idsMap.Add(deps...)
 	}
 
 	uniqueIds := idsMap.Slice()
@@ -67,26 +72,29 @@ func (s *TaskService) checkForTaskDependencyExistence(
 		)...,
 	)
 
-	nonExistentTasks := make([]int, 0, len(uniqueIds)-len(foundIds))
+	if len(uniqueIds) > len(foundIds) {
+		nonExistentTasks := make([]int, 0, len(uniqueIds)-len(foundIds))
 
-	for _, pair := range pairs {
-		for _, dependency := range pair.Second {
-			if !foundIds.Contains(dependency) {
-				nonExistentTasks = append(nonExistentTasks, int(dependency))
+		for _, deps := range dependencies {
+			for _, dependency := range deps {
+				if !foundIds.Contains(dependency) {
+					nonExistentTasks = append(nonExistentTasks, int(dependency))
+				}
 			}
 		}
-	}
 
-	if len(nonExistentTasks) > 0 {
-		stringified := utils.Map(
-			nonExistentTasks,
-			strconv.Itoa,
-		)
+		if len(nonExistentTasks) > 0 {
+			stringified := utils.Map(
+				nonExistentTasks,
+				strconv.Itoa,
+			)
 
-		return errors.Wrap(
-			ErrTaskDoesNotExist,
-			strings.Join(stringified, ","),
-		)
+			return errors.WithMessagef(
+				ErrTaskDoesNotExist,
+				"tasks: %v",
+				strings.Join(stringified, ","),
+			)
+		}
 	}
 
 	return nil

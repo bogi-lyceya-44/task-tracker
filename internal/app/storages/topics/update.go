@@ -22,8 +22,8 @@ func (s *TopicStorage) UpdateTopics(
 			updatedColumns[columnName] = *topic.Name
 		}
 
-		if topic.TaskIDs != nil {
-			updatedColumns[columnTaskIDs] = topic.TaskIDs
+		if topic.TaskIds != nil {
+			updatedColumns[columnTaskIDs] = topic.TaskIds
 		}
 
 		sql, args, err := sq.

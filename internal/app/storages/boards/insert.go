@@ -30,7 +30,7 @@ func (s *BoardStorage) InsertBoards(
 	for _, board := range boards {
 		builder = builder.Values(
 			board.Name,
-			board.TopicIDs,
+			board.TopicIds,
 			now,
 			now,
 		)

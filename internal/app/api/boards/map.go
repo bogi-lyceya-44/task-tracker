@@ -9,7 +9,7 @@ import (
 func MapCreateBoardPrototypeToDomain(board *desc.CreateBoardsRequest_BoardPrototype) models.Board {
 	return models.Board{
 		Name:     board.GetName(),
-		TopicIDs: board.GetTopicIds(),
+		TopicIds: board.GetTopicIds(),
 	}
 }
 
@@ -17,7 +17,7 @@ func MapDomainBoardToProto(board models.Board) *desc.Board {
 	return &desc.Board{
 		Id:        board.ID,
 		Name:      board.Name,
-		TopicIds:  board.TopicIDs,
+		TopicIds:  board.TopicIds,
 		CreatedAt: timestamppb.New(board.CreatedAt),
 		UpdatedAt: timestamppb.New(board.UpdatedAt),
 	}
@@ -31,7 +31,7 @@ func MapUpdateBoardPrototypeToUpdatedBoard(board *desc.UpdateBoardsRequest_Board
 	}
 
 	if board.TopicIds != nil {
-		result.TopicIDs = append(result.TopicIDs, board.TopicIds...)
+		result.TopicIds = append(result.TopicIds, board.TopicIds...)
 	}
 
 	return result, nil

@@ -23,7 +23,14 @@ func (s *TaskService) InsertTasks(
 		return nil, errors.Wrap(err, "checking self dependency")
 	}
 
-	if err := s.checkForTaskDependencyExistence(ctx, idsWithDependencies); err != nil {
+	allDependencies := utils.Map(
+		tasks,
+		func(task models.Task) []int64 {
+			return task.Dependencies
+		},
+	)
+
+	if err := s.checkForTaskDependencyExistence(ctx, allDependencies); err != nil {
 		return nil, errors.Wrap(err, "checking task existence")
 	}
 

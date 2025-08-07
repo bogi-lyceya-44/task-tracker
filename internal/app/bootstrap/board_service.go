@@ -6,6 +6,7 @@ import (
 	boards_api "github.com/bogi-lyceya-44/task-tracker/internal/app/api/boards"
 	boards_service "github.com/bogi-lyceya-44/task-tracker/internal/app/services/boards"
 	boards_storage "github.com/bogi-lyceya-44/task-tracker/internal/app/storages/boards"
+	topics_storage "github.com/bogi-lyceya-44/task-tracker/internal/app/storages/topics"
 	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/boards"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pkg/errors"
@@ -19,7 +20,8 @@ func InitBoardService(
 	pool *pgxpool.Pool,
 ) error {
 	boardStorage := boards_storage.NewBoardStorage(pool)
-	boardService := boards_service.NewBoardService(boardStorage)
+	topicStorage := topics_storage.NewTopicStorage(pool)
+	boardService := boards_service.NewBoardService(boardStorage, topicStorage)
 	impl := boards_api.New(boardService)
 
 	desc.RegisterBoardServiceServer(app.grpcServer, impl)

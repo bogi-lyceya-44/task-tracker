@@ -22,8 +22,8 @@ func (s *BoardStorage) UpdateBoards(
 			updatedColumns[columnName] = *board.Name
 		}
 
-		if board.TopicIDs != nil {
-			updatedColumns[columnTopicIDs] = board.TopicIDs
+		if board.TopicIds != nil {
+			updatedColumns[columnTopicIDs] = board.TopicIds
 		}
 
 		sql, args, err := sq.

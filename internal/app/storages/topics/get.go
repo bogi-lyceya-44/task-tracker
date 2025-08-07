@@ -47,7 +47,7 @@ func mapStorageTopicToDomain(topic Topic) models.Topic {
 	return models.Topic{
 		ID:        topic.ID,
 		Name:      topic.Name,
-		TaskIDs:   topic.TaskIDs,
+		TaskIds:   topic.TaskIds,
 		CreatedAt: topic.CreatedAt,
 		UpdatedAt: topic.UpdatedAt,
 	}

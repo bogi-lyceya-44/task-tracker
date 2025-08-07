@@ -9,7 +9,7 @@ import (
 func MapCreateTopicPrototypeToDomain(topic *desc.CreateTopicsRequest_TopicPrototype) models.Topic {
 	return models.Topic{
 		Name:    topic.GetName(),
-		TaskIDs: topic.GetTaskIds(),
+		TaskIds: topic.GetTaskIds(),
 	}
 }
 
@@ -17,7 +17,7 @@ func MapDomainTopicToProto(topic models.Topic) *desc.Topic {
 	return &desc.Topic{
 		Id:        topic.ID,
 		Name:      topic.Name,
-		TaskIds:   topic.TaskIDs,
+		TaskIds:   topic.TaskIds,
 		CreatedAt: timestamppb.New(topic.CreatedAt),
 		UpdatedAt: timestamppb.New(topic.UpdatedAt),
 	}
@@ -31,7 +31,7 @@ func MapUpdateTopicPrototypeToUpdatedTopic(topic *desc.UpdateTopicsRequest_Topic
 	}
 
 	if topic.TaskIds != nil {
-		result.TaskIDs = append(result.TaskIDs, topic.TaskIds...)
+		result.TaskIds = append(result.TaskIds, topic.TaskIds...)
 	}
 
 	return result, nil

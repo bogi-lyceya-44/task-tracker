@@ -5,6 +5,7 @@ import (
 
 	topics_api "github.com/bogi-lyceya-44/task-tracker/internal/app/api/topics"
 	topics_service "github.com/bogi-lyceya-44/task-tracker/internal/app/services/topics"
+	tasks_storage "github.com/bogi-lyceya-44/task-tracker/internal/app/storages/tasks"
 	topics_storage "github.com/bogi-lyceya-44/task-tracker/internal/app/storages/topics"
 	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -19,7 +20,8 @@ func InitTopicService(
 	pool *pgxpool.Pool,
 ) error {
 	topicStorage := topics_storage.NewTopicStorage(pool)
-	topicService := topics_service.NewTopicService(topicStorage)
+	tasksStorage := tasks_storage.NewTaskStorage(pool)
+	topicService := topics_service.NewTopicService(topicStorage, tasksStorage)
 	impl := topics_api.New(topicService)
 
 	desc.RegisterTopicServiceServer(app.grpcServer, impl)

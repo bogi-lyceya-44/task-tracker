@@ -10,5 +10,5 @@ func (s *BoardService) GetBoards(
 	ctx context.Context,
 	ids []int64,
 ) ([]models.Board, error) {
-	return s.storage.GetBoards(ctx, ids)
+	return s.boardStorage.GetBoards(ctx, ids)
 }

@@ -6,19 +6,28 @@ import (
 	"github.com/bogi-lyceya-44/task-tracker/internal/app/models"
 )
 
-type storage interface {
+type topicStorage interface {
 	GetTopics(ctx context.Context, ids []int64) ([]models.Topic, error)
 	InsertTopics(ctx context.Context, tasks []models.Topic) ([]int64, error)
 	UpdateTopics(ctx context.Context, tasks []models.UpdatedTopic) error
 	DeleteTopics(ctx context.Context, ids []int64) error
 }
 
-type TopicService struct {
-	storage storage
+type taskStorage interface {
+	GetTasks(ctx context.Context, ids []int64) ([]models.Task, error)
 }
 
-func NewTopicService(storage storage) *TopicService {
+type TopicService struct {
+	topicStorage topicStorage
+	taskStorage  taskStorage
+}
+
+func NewTopicService(
+	topicStorage topicStorage,
+	taskStorage taskStorage,
+) *TopicService {
 	return &TopicService{
-		storage: storage,
+		topicStorage: topicStorage,
+		taskStorage:  taskStorage,
 	}
 }

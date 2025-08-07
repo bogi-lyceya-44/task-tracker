@@ -47,7 +47,7 @@ func mapStorageBoardToDomain(board Board) models.Board {
 	return models.Board{
 		ID:        board.ID,
 		Name:      board.Name,
-		TopicIDs:  board.TopicIDs,
+		TopicIds:  board.TopicIds,
 		CreatedAt: board.CreatedAt,
 		UpdatedAt: board.UpdatedAt,
 	}
