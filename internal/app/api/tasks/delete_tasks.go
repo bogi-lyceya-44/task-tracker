@@ -12,9 +12,13 @@ func (i *Implementation) DeleteTasks(
 	ctx context.Context,
 	req *desc.DeleteTasksRequest,
 ) (*desc.DeleteTasksResponse, error) {
+	if err := req.ValidateAll(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "validating: %v", err)
+	}
+
 	err := i.taskService.DeleteTasks(ctx, req.Ids)
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return nil, status.Errorf(codes.Internal, "deleting tasks: %v", err)
 	}
 
 	return &desc.DeleteTasksResponse{}, nil

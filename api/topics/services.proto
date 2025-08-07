@@ -6,6 +6,7 @@ package api.v1.task_tracker.topics;
 
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
 import "api/topics/models.proto";
 
 service TopicService {
@@ -39,7 +40,7 @@ service TopicService {
 }
 
 message GetTopicsRequest {
-    repeated int64 ids = 1;
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
 }
 
 message GetTopicsResponse {
@@ -48,11 +49,12 @@ message GetTopicsResponse {
 
 message CreateTopicsRequest {
     message TopicPrototype {
-        string name = 1;
+        string name = 1 [(validate.rules).string.min_len = 1];
         repeated int64 task_ids = 2;
     }
 
-    repeated TopicPrototype topics_to_create = 1;
+    repeated TopicPrototype topics_to_create = 1
+        [(validate.rules).repeated.min_items = 1];
 }
 
 message CreateTopicsResponse {
@@ -62,17 +64,18 @@ message CreateTopicsResponse {
 message UpdateTopicsRequest {
     message TopicPrototype {
         int64 id = 1;
-        string name = 2;
+        optional string name = 2 [(validate.rules).string.min_len = 1];
         repeated int64 task_ids = 3;
     }
 
-    repeated TopicPrototype topics_to_update = 1;
+    repeated TopicPrototype topics_to_update = 1
+        [(validate.rules).repeated.min_items = 1];
 }
 
 message UpdateTopicsResponse {}
 
 message DeleteTopicsRequest {
-    repeated int64 ids = 1;
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
 }
 
 message DeleteTopicsResponse {}

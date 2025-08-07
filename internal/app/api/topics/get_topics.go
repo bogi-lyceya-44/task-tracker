@@ -1,0 +1,31 @@
+package topics
+
+import (
+	"context"
+
+	"github.com/bogi-lyceya-44/common/pkg/utils"
+	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+)
+
+func (i *Implementation) GetTopics(
+	ctx context.Context,
+	req *desc.GetTopicsRequest,
+) (*desc.GetTopicsResponse, error) {
+	if err := req.ValidateAll(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "validating: %v", err)
+	}
+
+	tasks, err := i.topicService.GetTopics(ctx, req.GetIds())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "getting topics: %v", err)
+	}
+
+	mappedTopics := utils.Map(
+		tasks,
+		MapDomainTopicToProto,
+	)
+
+	return &desc.GetTopicsResponse{Topics: mappedTopics}, nil
+}

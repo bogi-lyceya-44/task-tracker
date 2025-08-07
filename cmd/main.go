@@ -4,10 +4,7 @@ import (
 	"log"
 
 	"github.com/bogi-lyceya-44/task-tracker/config"
-	tasks_api "github.com/bogi-lyceya-44/task-tracker/internal/app/api/tasks"
 	"github.com/bogi-lyceya-44/task-tracker/internal/app/bootstrap"
-	tasks_service "github.com/bogi-lyceya-44/task-tracker/internal/app/services/tasks"
-	tasks_storage "github.com/bogi-lyceya-44/task-tracker/internal/app/storages/tasks"
 	"github.com/pkg/errors"
 )
 
@@ -31,11 +28,21 @@ func main() {
 		log.Fatal(errors.Wrap(err, "init pool"))
 	}
 
-	tasksStorage := tasks_storage.NewTaskStorage(pool)
-	taskService := tasks_service.NewTaskService(tasksStorage)
-	impl := tasks_api.New(taskService)
+	app := bootstrap.InitApp(cfg)
 
-	if err = bootstrap.RunApp(ctx, *cfg, impl); err != nil {
+	if err = bootstrap.InitTaskService(ctx, app, pool); err != nil {
+		log.Fatal(errors.Wrap(err, "init task service"))
+	}
+
+	if err = bootstrap.InitTopicService(ctx, app, pool); err != nil {
+		log.Fatal(errors.Wrap(err, "init topic service"))
+	}
+
+	if err = bootstrap.InitBoardService(ctx, app, pool); err != nil {
+		log.Fatal(errors.Wrap(err, "init topic service"))
+	}
+
+	if err = app.Run(ctx); err != nil {
 		log.Fatal(errors.Wrap(err, "running app"))
 	}
 }

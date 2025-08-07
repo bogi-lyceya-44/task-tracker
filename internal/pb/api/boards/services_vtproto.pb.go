@@ -141,7 +141,10 @@ func (m *UpdateBoardsRequest_BoardPrototype) CloneVT() *UpdateBoardsRequest_Boar
 	}
 	r := new(UpdateBoardsRequest_BoardPrototype)
 	r.Id = m.Id
-	r.Name = m.Name
+	if rhs := m.Name; rhs != nil {
+		tmpVal := *rhs
+		r.Name = &tmpVal
+	}
 	if rhs := m.TopicIds; rhs != nil {
 		tmpContainer := make([]int64, len(rhs))
 		copy(tmpContainer, rhs)
@@ -387,7 +390,7 @@ func (this *UpdateBoardsRequest_BoardPrototype) EqualVT(that *UpdateBoardsReques
 	if this.Id != that.Id {
 		return false
 	}
-	if this.Name != that.Name {
+	if p, q := this.Name, that.Name; (p == nil && q != nil) || (p != nil && (q == nil || *p != *q)) {
 		return false
 	}
 	if len(this.TopicIds) != len(that.TopicIds) {
@@ -1009,10 +1012,10 @@ func (m *UpdateBoardsRequest_BoardPrototype) MarshalToSizedBufferVT(dAtA []byte)
 		i--
 		dAtA[i] = 0x1a
 	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Name)))
+	if m.Name != nil {
+		i -= len(*m.Name)
+		copy(dAtA[i:], *m.Name)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(*m.Name)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1499,10 +1502,10 @@ func (m *UpdateBoardsRequest_BoardPrototype) MarshalToSizedBufferVTStrict(dAtA [
 		i--
 		dAtA[i] = 0x1a
 	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Name)))
+	if m.Name != nil {
+		i -= len(*m.Name)
+		copy(dAtA[i:], *m.Name)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(*m.Name)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1775,8 +1778,8 @@ func (m *UpdateBoardsRequest_BoardPrototype) SizeVT() (n int) {
 	if m.Id != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.Id))
 	}
-	l = len(m.Name)
-	if l > 0 {
+	if m.Name != nil {
+		l = len(*m.Name)
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	if len(m.TopicIds) > 0 {
@@ -2504,7 +2507,8 @@ func (m *UpdateBoardsRequest_BoardPrototype) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Name = string(dAtA[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
+			m.Name = &s
 			iNdEx = postIndex
 		case 3:
 			if wireType == 0 {
@@ -3587,7 +3591,8 @@ func (m *UpdateBoardsRequest_BoardPrototype) UnmarshalVTUnsafe(dAtA []byte) erro
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.Name = stringValue
+			s := stringValue
+			m.Name = &s
 			iNdEx = postIndex
 		case 3:
 			if wireType == 0 {

@@ -57,6 +57,17 @@ func (m *GetTopicsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetIds()) < 1 {
+		err := GetTopicsRequestValidationError{
+			field:  "Ids",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return GetTopicsRequestMultiError(errors)
 	}
@@ -292,6 +303,17 @@ func (m *CreateTopicsRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if len(m.GetTopicsToCreate()) < 1 {
+		err := CreateTopicsRequestValidationError{
+			field:  "TopicsToCreate",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	for idx, item := range m.GetTopicsToCreate() {
 		_, _ = idx, item
@@ -531,6 +553,17 @@ func (m *UpdateTopicsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetTopicsToUpdate()) < 1 {
+		err := UpdateTopicsRequestValidationError{
+			field:  "TopicsToUpdate",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	for idx, item := range m.GetTopicsToUpdate() {
 		_, _ = idx, item
 
@@ -769,6 +802,17 @@ func (m *DeleteTopicsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetIds()) < 1 {
+		err := DeleteTopicsRequestValidationError{
+			field:  "Ids",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return DeleteTopicsRequestMultiError(errors)
 	}
@@ -974,7 +1018,16 @@ func (m *CreateTopicsRequest_TopicPrototype) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Name
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := CreateTopicsRequest_TopicPrototypeValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return CreateTopicsRequest_TopicPrototypeMultiError(errors)
@@ -1083,7 +1136,20 @@ func (m *UpdateTopicsRequest_TopicPrototype) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Name
+	if m.Name != nil {
+
+		if utf8.RuneCountInString(m.GetName()) < 1 {
+			err := UpdateTopicsRequest_TopicPrototypeValidationError{
+				field:  "Name",
+				reason: "value length must be at least 1 runes",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return UpdateTopicsRequest_TopicPrototypeMultiError(errors)

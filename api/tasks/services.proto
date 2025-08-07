@@ -6,6 +6,7 @@ package api.v1.task_tracker.tasks;
 
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
 import "api/tasks/models.proto";
 
 service TaskService {
@@ -39,7 +40,7 @@ service TaskService {
 }
 
 message GetTasksRequest {
-    repeated int64 ids = 1;
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
 }
 
 message GetTasksResponse {
@@ -48,8 +49,8 @@ message GetTasksResponse {
 
 message CreateTasksRequest {
     message TaskPrototype {
-        string name = 1;
-        string description = 2;
+        string name = 1 [(validate.rules).string.min_len = 1];
+        string description = 2 [(validate.rules).string.min_len = 1];
         repeated int64 deps = 3;
         Priority priority = 4;
 
@@ -57,7 +58,8 @@ message CreateTasksRequest {
         google.protobuf.Timestamp finish_time = 6;
     }
 
-    repeated TaskPrototype tasks_to_create = 1;
+    repeated TaskPrototype tasks_to_create = 1
+        [(validate.rules).repeated.min_items = 1];
 }
 
 message CreateTasksResponse {
@@ -67,8 +69,8 @@ message CreateTasksResponse {
 message UpdateTasksRequest {
     message TaskPrototype {
         int64 id = 1;
-        optional string name = 2;
-        optional string description = 3;
+        optional string name = 2 [(validate.rules).string.min_len = 1];
+        optional string description = 3 [(validate.rules).string.min_len = 1];
         repeated int64 deps = 4;
         optional Priority priority = 5;
 
@@ -76,13 +78,14 @@ message UpdateTasksRequest {
         optional google.protobuf.Timestamp finish_time = 7;
     }
 
-    repeated TaskPrototype tasks_to_update = 1;
+    repeated TaskPrototype tasks_to_update = 1
+        [(validate.rules).repeated.min_items = 1];
 }
 
 message UpdateTasksResponse {}
 
 message DeleteTasksRequest {
-    repeated int64 ids = 1;
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
 }
 
 message DeleteTasksResponse {}

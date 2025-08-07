@@ -13,9 +13,13 @@ func (i *Implementation) GetTasks(
 	ctx context.Context,
 	req *desc.GetTasksRequest,
 ) (*desc.GetTasksResponse, error) {
+	if err := req.ValidateAll(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "validating: %v", err)
+	}
+
 	tasks, err := i.taskService.GetTasks(ctx, req.GetIds())
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return nil, status.Errorf(codes.Internal, "getting tasks: %v", err)
 	}
 
 	mappedTasks, err := utils.MapWithError(
@@ -23,7 +27,7 @@ func (i *Implementation) GetTasks(
 		MapDomainTaskToProto,
 	)
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return nil, status.Errorf(codes.Internal, "mapping tasks: %v", err)
 	}
 
 	return &desc.GetTasksResponse{Tasks: mappedTasks}, nil

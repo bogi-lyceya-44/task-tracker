@@ -11,6 +11,7 @@ import (
 	sync "sync"
 	unsafe "unsafe"
 
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -415,7 +416,7 @@ func (x *CreateBoardsRequest_BoardPrototype) GetTopicIds() []int64 {
 type UpdateBoardsRequest_BoardPrototype struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	TopicIds      []int64                `protobuf:"varint,3,rep,packed,name=topic_ids,json=topicIds,proto3" json:"topic_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -459,8 +460,8 @@ func (x *UpdateBoardsRequest_BoardPrototype) GetId() int64 {
 }
 
 func (x *UpdateBoardsRequest_BoardPrototype) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
@@ -476,27 +477,28 @@ var File_api_boards_services_proto protoreflect.FileDescriptor
 
 const file_api_boards_services_proto_rawDesc = "" +
 	"\n" +
-	"\x19api/boards/services.proto\x12\x1aapi.v1.task_tracker.boards\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17api/boards/models.proto\"$\n" +
-	"\x10GetBoardsRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"N\n" +
+	"\x19api/boards/services.proto\x12\x1aapi.v1.task_tracker.boards\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x17api/boards/models.proto\".\n" +
+	"\x10GetBoardsRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"N\n" +
 	"\x11GetBoardsResponse\x129\n" +
-	"\x06boards\x18\x01 \x03(\v2!.api.v1.task_tracker.boards.BoardR\x06boards\"\xc2\x01\n" +
-	"\x13CreateBoardsRequest\x12h\n" +
-	"\x10boards_to_create\x18\x01 \x03(\v2>.api.v1.task_tracker.boards.CreateBoardsRequest.BoardPrototypeR\x0eboardsToCreate\x1aA\n" +
-	"\x0eBoardPrototype\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
+	"\x06boards\x18\x01 \x03(\v2!.api.v1.task_tracker.boards.BoardR\x06boards\"\xd5\x01\n" +
+	"\x13CreateBoardsRequest\x12r\n" +
+	"\x10boards_to_create\x18\x01 \x03(\v2>.api.v1.task_tracker.boards.CreateBoardsRequest.BoardPrototypeB\b\xfaB\x05\x92\x01\x02\b\x01R\x0eboardsToCreate\x1aJ\n" +
+	"\x0eBoardPrototype\x12\x1b\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
 	"\ttopic_ids\x18\x02 \x03(\x03R\btopicIds\"(\n" +
 	"\x14CreateBoardsResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\xd2\x01\n" +
-	"\x13UpdateBoardsRequest\x12h\n" +
-	"\x10boards_to_update\x18\x01 \x03(\v2>.api.v1.task_tracker.boards.UpdateBoardsRequest.BoardPrototypeR\x0eboardsToUpdate\x1aQ\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\xf3\x01\n" +
+	"\x13UpdateBoardsRequest\x12r\n" +
+	"\x10boards_to_update\x18\x01 \x03(\v2>.api.v1.task_tracker.boards.UpdateBoardsRequest.BoardPrototypeB\b\xfaB\x05\x92\x01\x02\b\x01R\x0eboardsToUpdate\x1ah\n" +
 	"\x0eBoardPrototype\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
-	"\ttopic_ids\x18\x03 \x03(\x03R\btopicIds\"\x16\n" +
-	"\x14UpdateBoardsResponse\"'\n" +
-	"\x13DeleteBoardsRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\x16\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12 \n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01H\x00R\x04name\x88\x01\x01\x12\x1b\n" +
+	"\ttopic_ids\x18\x03 \x03(\x03R\btopicIdsB\a\n" +
+	"\x05_name\"\x16\n" +
+	"\x14UpdateBoardsResponse\"1\n" +
+	"\x13DeleteBoardsRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"\x16\n" +
 	"\x14DeleteBoardsResponse2\xda\x04\n" +
 	"\fBoardService\x12\x87\x01\n" +
 	"\tGetBoards\x12,.api.v1.task_tracker.boards.GetBoardsRequest\x1a-.api.v1.task_tracker.boards.GetBoardsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/get_boards\x12\x93\x01\n" +
@@ -555,6 +557,7 @@ func file_api_boards_services_proto_init() {
 		return
 	}
 	file_api_boards_models_proto_init()
+	file_api_boards_services_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

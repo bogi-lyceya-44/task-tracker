@@ -11,6 +11,7 @@ import (
 	sync "sync"
 	unsafe "unsafe"
 
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -415,7 +416,7 @@ func (x *CreateTopicsRequest_TopicPrototype) GetTaskIds() []int64 {
 type UpdateTopicsRequest_TopicPrototype struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	TaskIds       []int64                `protobuf:"varint,3,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -459,8 +460,8 @@ func (x *UpdateTopicsRequest_TopicPrototype) GetId() int64 {
 }
 
 func (x *UpdateTopicsRequest_TopicPrototype) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
@@ -476,27 +477,28 @@ var File_api_topics_services_proto protoreflect.FileDescriptor
 
 const file_api_topics_services_proto_rawDesc = "" +
 	"\n" +
-	"\x19api/topics/services.proto\x12\x1aapi.v1.task_tracker.topics\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17api/topics/models.proto\"$\n" +
-	"\x10GetTopicsRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"N\n" +
+	"\x19api/topics/services.proto\x12\x1aapi.v1.task_tracker.topics\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x17api/topics/models.proto\".\n" +
+	"\x10GetTopicsRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"N\n" +
 	"\x11GetTopicsResponse\x129\n" +
-	"\x06topics\x18\x01 \x03(\v2!.api.v1.task_tracker.topics.TopicR\x06topics\"\xc0\x01\n" +
-	"\x13CreateTopicsRequest\x12h\n" +
-	"\x10topics_to_create\x18\x01 \x03(\v2>.api.v1.task_tracker.topics.CreateTopicsRequest.TopicPrototypeR\x0etopicsToCreate\x1a?\n" +
-	"\x0eTopicPrototype\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x19\n" +
+	"\x06topics\x18\x01 \x03(\v2!.api.v1.task_tracker.topics.TopicR\x06topics\"\xd3\x01\n" +
+	"\x13CreateTopicsRequest\x12r\n" +
+	"\x10topics_to_create\x18\x01 \x03(\v2>.api.v1.task_tracker.topics.CreateTopicsRequest.TopicPrototypeB\b\xfaB\x05\x92\x01\x02\b\x01R\x0etopicsToCreate\x1aH\n" +
+	"\x0eTopicPrototype\x12\x1b\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x12\x19\n" +
 	"\btask_ids\x18\x02 \x03(\x03R\ataskIds\"(\n" +
 	"\x14CreateTopicsResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\xd0\x01\n" +
-	"\x13UpdateTopicsRequest\x12h\n" +
-	"\x10topics_to_update\x18\x01 \x03(\v2>.api.v1.task_tracker.topics.UpdateTopicsRequest.TopicPrototypeR\x0etopicsToUpdate\x1aO\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\xf1\x01\n" +
+	"\x13UpdateTopicsRequest\x12r\n" +
+	"\x10topics_to_update\x18\x01 \x03(\v2>.api.v1.task_tracker.topics.UpdateTopicsRequest.TopicPrototypeB\b\xfaB\x05\x92\x01\x02\b\x01R\x0etopicsToUpdate\x1af\n" +
 	"\x0eTopicPrototype\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
-	"\btask_ids\x18\x03 \x03(\x03R\ataskIds\"\x16\n" +
-	"\x14UpdateTopicsResponse\"'\n" +
-	"\x13DeleteTopicsRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\x16\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12 \n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01H\x00R\x04name\x88\x01\x01\x12\x19\n" +
+	"\btask_ids\x18\x03 \x03(\x03R\ataskIdsB\a\n" +
+	"\x05_name\"\x16\n" +
+	"\x14UpdateTopicsResponse\"1\n" +
+	"\x13DeleteTopicsRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"\x16\n" +
 	"\x14DeleteTopicsResponse2\xda\x04\n" +
 	"\fTopicService\x12\x87\x01\n" +
 	"\tGetTopics\x12,.api.v1.task_tracker.topics.GetTopicsRequest\x1a-.api.v1.task_tracker.topics.GetTopicsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/get_topics\x12\x93\x01\n" +
@@ -555,6 +557,7 @@ func file_api_topics_services_proto_init() {
 		return
 	}
 	file_api_topics_models_proto_init()
+	file_api_topics_services_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

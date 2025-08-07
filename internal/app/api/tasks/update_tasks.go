@@ -13,16 +13,20 @@ func (i *Implementation) UpdateTasks(
 	ctx context.Context,
 	req *desc.UpdateTasksRequest,
 ) (*desc.UpdateTasksResponse, error) {
+	if err := req.ValidateAll(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "validating: %v", err)
+	}
+
 	tasks, err := utils.MapWithError(
 		req.TasksToUpdate,
 		MapUpdateTaskPrototypeToUpdatedTask,
 	)
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+		return nil, status.Errorf(codes.InvalidArgument, "mapping tasks: %v", err)
 	}
 
 	if err = i.taskService.UpdateTasks(ctx, tasks); err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return nil, status.Errorf(codes.Internal, "updating tasks: %v", err)
 	}
 
 	return &desc.UpdateTasksResponse{}, nil

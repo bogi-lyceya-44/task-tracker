@@ -5,7 +5,8 @@ CREATE TABLE task_tracker.topics (
     name TEXT NOT NULL,
     task_ids BIGINT[],
     created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
+    updated_at TIMESTAMP NOT NULL,
+    is_deleted BOOLEAN NOT NULL DEFAULT false
 );
 -- +goose StatementEnd
 

@@ -57,6 +57,17 @@ func (m *GetBoardsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetIds()) < 1 {
+		err := GetBoardsRequestValidationError{
+			field:  "Ids",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return GetBoardsRequestMultiError(errors)
 	}
@@ -292,6 +303,17 @@ func (m *CreateBoardsRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if len(m.GetBoardsToCreate()) < 1 {
+		err := CreateBoardsRequestValidationError{
+			field:  "BoardsToCreate",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	for idx, item := range m.GetBoardsToCreate() {
 		_, _ = idx, item
@@ -531,6 +553,17 @@ func (m *UpdateBoardsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetBoardsToUpdate()) < 1 {
+		err := UpdateBoardsRequestValidationError{
+			field:  "BoardsToUpdate",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	for idx, item := range m.GetBoardsToUpdate() {
 		_, _ = idx, item
 
@@ -769,6 +802,17 @@ func (m *DeleteBoardsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetIds()) < 1 {
+		err := DeleteBoardsRequestValidationError{
+			field:  "Ids",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return DeleteBoardsRequestMultiError(errors)
 	}
@@ -974,7 +1018,16 @@ func (m *CreateBoardsRequest_BoardPrototype) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Name
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := CreateBoardsRequest_BoardPrototypeValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return CreateBoardsRequest_BoardPrototypeMultiError(errors)
@@ -1083,7 +1136,20 @@ func (m *UpdateBoardsRequest_BoardPrototype) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Name
+	if m.Name != nil {
+
+		if utf8.RuneCountInString(m.GetName()) < 1 {
+			err := UpdateBoardsRequest_BoardPrototypeValidationError{
+				field:  "Name",
+				reason: "value length must be at least 1 runes",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return UpdateBoardsRequest_BoardPrototypeMultiError(errors)

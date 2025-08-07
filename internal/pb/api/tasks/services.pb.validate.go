@@ -57,6 +57,17 @@ func (m *GetTasksRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetIds()) < 1 {
+		err := GetTasksRequestValidationError{
+			field:  "Ids",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return GetTasksRequestMultiError(errors)
 	}
@@ -290,6 +301,17 @@ func (m *CreateTasksRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if len(m.GetTasksToCreate()) < 1 {
+		err := CreateTasksRequestValidationError{
+			field:  "TasksToCreate",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	for idx, item := range m.GetTasksToCreate() {
 		_, _ = idx, item
@@ -529,6 +551,17 @@ func (m *UpdateTasksRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetTasksToUpdate()) < 1 {
+		err := UpdateTasksRequestValidationError{
+			field:  "TasksToUpdate",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	for idx, item := range m.GetTasksToUpdate() {
 		_, _ = idx, item
 
@@ -767,6 +800,17 @@ func (m *DeleteTasksRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetIds()) < 1 {
+		err := DeleteTasksRequestValidationError{
+			field:  "Ids",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return DeleteTasksRequestMultiError(errors)
 	}
@@ -972,9 +1016,27 @@ func (m *CreateTasksRequest_TaskPrototype) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Name
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := CreateTasksRequest_TaskPrototypeValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Description
+	if utf8.RuneCountInString(m.GetDescription()) < 1 {
+		err := CreateTasksRequest_TaskPrototypeValidationError{
+			field:  "Description",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for Priority
 
@@ -1144,11 +1206,33 @@ func (m *UpdateTasksRequest_TaskPrototype) validate(all bool) error {
 	// no validation rules for Id
 
 	if m.Name != nil {
-		// no validation rules for Name
+
+		if utf8.RuneCountInString(m.GetName()) < 1 {
+			err := UpdateTasksRequest_TaskPrototypeValidationError{
+				field:  "Name",
+				reason: "value length must be at least 1 runes",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
 	}
 
 	if m.Description != nil {
-		// no validation rules for Description
+
+		if utf8.RuneCountInString(m.GetDescription()) < 1 {
+			err := UpdateTasksRequest_TaskPrototypeValidationError{
+				field:  "Description",
+				reason: "value length must be at least 1 runes",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
 	}
 
 	if m.Priority != nil {

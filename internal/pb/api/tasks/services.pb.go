@@ -11,6 +11,7 @@ import (
 	sync "sync"
 	unsafe "unsafe"
 
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -540,16 +541,16 @@ var File_api_tasks_services_proto protoreflect.FileDescriptor
 
 const file_api_tasks_services_proto_rawDesc = "" +
 	"\n" +
-	"\x18api/tasks/services.proto\x12\x19api.v1.task_tracker.tasks\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x16api/tasks/models.proto\"#\n" +
-	"\x0fGetTasksRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"I\n" +
+	"\x18api/tasks/services.proto\x12\x19api.v1.task_tracker.tasks\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x16api/tasks/models.proto\"-\n" +
+	"\x0fGetTasksRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"I\n" +
 	"\x10GetTasksResponse\x125\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x1f.api.v1.task_tracker.tasks.TaskR\x05tasks\"\x8e\x03\n" +
-	"\x12CreateTasksRequest\x12c\n" +
-	"\x0ftasks_to_create\x18\x01 \x03(\v2;.api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototypeR\rtasksToCreate\x1a\x92\x02\n" +
-	"\rTaskPrototype\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x1f.api.v1.task_tracker.tasks.TaskR\x05tasks\"\xaa\x03\n" +
+	"\x12CreateTasksRequest\x12m\n" +
+	"\x0ftasks_to_create\x18\x01 \x03(\v2;.api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototypeB\b\xfaB\x05\x92\x01\x02\b\x01R\rtasksToCreate\x1a\xa4\x02\n" +
+	"\rTaskPrototype\x12\x1b\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x12)\n" +
+	"\vdescription\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vdescription\x12\x12\n" +
 	"\x04deps\x18\x03 \x03(\x03R\x04deps\x12?\n" +
 	"\bpriority\x18\x04 \x01(\x0e2#.api.v1.task_tracker.tasks.PriorityR\bpriority\x129\n" +
 	"\n" +
@@ -557,13 +558,13 @@ const file_api_tasks_services_proto_rawDesc = "" +
 	"\vfinish_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"finishTime\"'\n" +
 	"\x13CreateTasksResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\xfc\x03\n" +
-	"\x12UpdateTasksRequest\x12c\n" +
-	"\x0ftasks_to_update\x18\x01 \x03(\v2;.api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototypeR\rtasksToUpdate\x1a\x80\x03\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\x98\x04\n" +
+	"\x12UpdateTasksRequest\x12m\n" +
+	"\x0ftasks_to_update\x18\x01 \x03(\v2;.api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototypeB\b\xfaB\x05\x92\x01\x02\b\x01R\rtasksToUpdate\x1a\x92\x03\n" +
 	"\rTaskPrototype\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12%\n" +
-	"\vdescription\x18\x03 \x01(\tH\x01R\vdescription\x88\x01\x01\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12 \n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01H\x00R\x04name\x88\x01\x01\x12.\n" +
+	"\vdescription\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01H\x01R\vdescription\x88\x01\x01\x12\x12\n" +
 	"\x04deps\x18\x04 \x03(\x03R\x04deps\x12D\n" +
 	"\bpriority\x18\x05 \x01(\x0e2#.api.v1.task_tracker.tasks.PriorityH\x02R\bpriority\x88\x01\x01\x12>\n" +
 	"\n" +
@@ -575,9 +576,9 @@ const file_api_tasks_services_proto_rawDesc = "" +
 	"\t_priorityB\r\n" +
 	"\v_start_timeB\x0e\n" +
 	"\f_finish_time\"\x15\n" +
-	"\x13UpdateTasksResponse\"&\n" +
-	"\x12DeleteTasksRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\x15\n" +
+	"\x13UpdateTasksResponse\"0\n" +
+	"\x12DeleteTasksRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"\x15\n" +
 	"\x13DeleteTasksResponse2\xc1\x04\n" +
 	"\vTaskService\x12\x81\x01\n" +
 	"\bGetTasks\x12*.api.v1.task_tracker.tasks.GetTasksRequest\x1a+.api.v1.task_tracker.tasks.GetTasksResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/v1/get_tasks\x12\x8d\x01\n" +

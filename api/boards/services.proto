@@ -6,6 +6,7 @@ package api.v1.task_tracker.boards;
 
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
 import "api/boards/models.proto";
 
 service BoardService {
@@ -39,7 +40,7 @@ service BoardService {
 }
 
 message GetBoardsRequest {
-    repeated int64 ids = 1;
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
 }
 
 message GetBoardsResponse {
@@ -48,11 +49,12 @@ message GetBoardsResponse {
 
 message CreateBoardsRequest {
     message BoardPrototype {
-        string name = 1;
+        string name = 1 [(validate.rules).string.min_len = 1];
         repeated int64 topic_ids = 2;
     }
 
-    repeated BoardPrototype boards_to_create = 1;
+    repeated BoardPrototype boards_to_create = 1
+        [(validate.rules).repeated.min_items = 1];
 }
 
 message CreateBoardsResponse {
@@ -62,17 +64,18 @@ message CreateBoardsResponse {
 message UpdateBoardsRequest {
     message BoardPrototype {
         int64 id = 1;
-        string name = 2;
+        optional string name = 2 [(validate.rules).string.min_len = 1];
         repeated int64 topic_ids = 3;
     }
 
-    repeated BoardPrototype boards_to_update = 1;
+    repeated BoardPrototype boards_to_update = 1
+        [(validate.rules).repeated.min_items = 1];
 }
 
 message UpdateBoardsResponse {}
 
 message DeleteBoardsRequest {
-    repeated int64 ids = 1;
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
 }
 
 message DeleteBoardsResponse {}
