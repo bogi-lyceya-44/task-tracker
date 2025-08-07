@@ -2,5 +2,5 @@
 
 package models
 
-// ENUM(low, medium, high, critical)
+// ENUM(undefined, low, medium, high, critical)
 type Priority int32

@@ -1143,68 +1143,82 @@ func (m *UpdateTasksRequest_TaskPrototype) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Name
-
-	// no validation rules for Description
-
-	// no validation rules for Priority
-
-	if all {
-		switch v := interface{}(m.GetStartTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
-					field:  "StartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
-					field:  "StartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateTasksRequest_TaskPrototypeValidationError{
-				field:  "StartTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+	if m.Name != nil {
+		// no validation rules for Name
 	}
 
-	if all {
-		switch v := interface{}(m.GetFinishTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
-					field:  "FinishTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+	if m.Description != nil {
+		// no validation rules for Description
+	}
+
+	if m.Priority != nil {
+		// no validation rules for Priority
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
+				return UpdateTasksRequest_TaskPrototypeValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.FinishTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetFinishTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
+						field:  "FinishTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateTasksRequest_TaskPrototypeValidationError{
+						field:  "FinishTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFinishTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateTasksRequest_TaskPrototypeValidationError{
 					field:  "FinishTime",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetFinishTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateTasksRequest_TaskPrototypeValidationError{
-				field:  "FinishTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
 	if len(errors) > 0 {

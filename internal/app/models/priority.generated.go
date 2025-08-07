@@ -11,8 +11,10 @@ import (
 )
 
 const (
+	// PriorityUndefined is a Priority of type Undefined.
+	PriorityUndefined Priority = iota
 	// PriorityLow is a Priority of type Low.
-	PriorityLow Priority = iota
+	PriorityLow
 	// PriorityMedium is a Priority of type Medium.
 	PriorityMedium
 	// PriorityHigh is a Priority of type High.
@@ -23,13 +25,14 @@ const (
 
 var ErrInvalidPriority = fmt.Errorf("not a valid Priority, try [%s]", strings.Join(_PriorityNames, ", "))
 
-const _PriorityName = "lowmediumhighcritical"
+const _PriorityName = "undefinedlowmediumhighcritical"
 
 var _PriorityNames = []string{
-	_PriorityName[0:3],
-	_PriorityName[3:9],
-	_PriorityName[9:13],
-	_PriorityName[13:21],
+	_PriorityName[0:9],
+	_PriorityName[9:12],
+	_PriorityName[12:18],
+	_PriorityName[18:22],
+	_PriorityName[22:30],
 }
 
 // PriorityNames returns a list of possible string values of Priority.
@@ -42,6 +45,7 @@ func PriorityNames() []string {
 // PriorityValues returns a list of the values for Priority
 func PriorityValues() []Priority {
 	return []Priority{
+		PriorityUndefined,
 		PriorityLow,
 		PriorityMedium,
 		PriorityHigh,
@@ -50,10 +54,11 @@ func PriorityValues() []Priority {
 }
 
 var _PriorityMap = map[Priority]string{
-	PriorityLow:      _PriorityName[0:3],
-	PriorityMedium:   _PriorityName[3:9],
-	PriorityHigh:     _PriorityName[9:13],
-	PriorityCritical: _PriorityName[13:21],
+	PriorityUndefined: _PriorityName[0:9],
+	PriorityLow:       _PriorityName[9:12],
+	PriorityMedium:    _PriorityName[12:18],
+	PriorityHigh:      _PriorityName[18:22],
+	PriorityCritical:  _PriorityName[22:30],
 }
 
 // String implements the Stringer interface.
@@ -72,10 +77,11 @@ func (x Priority) IsValid() bool {
 }
 
 var _PriorityValue = map[string]Priority{
-	_PriorityName[0:3]:   PriorityLow,
-	_PriorityName[3:9]:   PriorityMedium,
-	_PriorityName[9:13]:  PriorityHigh,
-	_PriorityName[13:21]: PriorityCritical,
+	_PriorityName[0:9]:   PriorityUndefined,
+	_PriorityName[9:12]:  PriorityLow,
+	_PriorityName[12:18]: PriorityMedium,
+	_PriorityName[18:22]: PriorityHigh,
+	_PriorityName[22:30]: PriorityCritical,
 }
 
 // ParsePriority attempts to convert a string to a Priority.

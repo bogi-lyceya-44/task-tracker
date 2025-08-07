@@ -5,11 +5,12 @@ CREATE TABLE task_tracker.tasks (
     name TEXT NOT NULL,
     description TEXT,
     dependencies BIGINT[],
-    priority task_tracker.priority NOT NULL,
+    priority INT NOT NULL,
     start_time TIMESTAMP,
     finish_time TIMESTAMP,
     created_at TIMESTAMP,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP,
+    is_deleted BOOLEAN NOT NULL DEFAULT false
 );
 -- +goose StatementEnd
 

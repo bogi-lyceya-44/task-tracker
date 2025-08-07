@@ -147,15 +147,24 @@ func (m *UpdateTasksRequest_TaskPrototype) CloneVT() *UpdateTasksRequest_TaskPro
 	}
 	r := new(UpdateTasksRequest_TaskPrototype)
 	r.Id = m.Id
-	r.Name = m.Name
-	r.Description = m.Description
-	r.Priority = m.Priority
 	r.StartTime = (*timestamppb.Timestamp)((*timestamppb1.Timestamp)(m.StartTime).CloneVT())
 	r.FinishTime = (*timestamppb.Timestamp)((*timestamppb1.Timestamp)(m.FinishTime).CloneVT())
+	if rhs := m.Name; rhs != nil {
+		tmpVal := *rhs
+		r.Name = &tmpVal
+	}
+	if rhs := m.Description; rhs != nil {
+		tmpVal := *rhs
+		r.Description = &tmpVal
+	}
 	if rhs := m.Deps; rhs != nil {
 		tmpContainer := make([]int64, len(rhs))
 		copy(tmpContainer, rhs)
 		r.Deps = tmpContainer
+	}
+	if rhs := m.Priority; rhs != nil {
+		tmpVal := *rhs
+		r.Priority = &tmpVal
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -409,10 +418,10 @@ func (this *UpdateTasksRequest_TaskPrototype) EqualVT(that *UpdateTasksRequest_T
 	if this.Id != that.Id {
 		return false
 	}
-	if this.Name != that.Name {
+	if p, q := this.Name, that.Name; (p == nil && q != nil) || (p != nil && (q == nil || *p != *q)) {
 		return false
 	}
-	if this.Description != that.Description {
+	if p, q := this.Description, that.Description; (p == nil && q != nil) || (p != nil && (q == nil || *p != *q)) {
 		return false
 	}
 	if len(this.Deps) != len(that.Deps) {
@@ -424,7 +433,7 @@ func (this *UpdateTasksRequest_TaskPrototype) EqualVT(that *UpdateTasksRequest_T
 			return false
 		}
 	}
-	if this.Priority != that.Priority {
+	if p, q := this.Priority, that.Priority; (p == nil && q != nil) || (p != nil && (q == nil || *p != *q)) {
 		return false
 	}
 	if !(*timestamppb1.Timestamp)(this.StartTime).EqualVT((*timestamppb1.Timestamp)(that.StartTime)) {
@@ -1074,8 +1083,8 @@ func (m *UpdateTasksRequest_TaskPrototype) MarshalToSizedBufferVT(dAtA []byte) (
 		i--
 		dAtA[i] = 0x32
 	}
-	if m.Priority != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Priority))
+	if m.Priority != nil {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(*m.Priority))
 		i--
 		dAtA[i] = 0x28
 	}
@@ -1100,17 +1109,17 @@ func (m *UpdateTasksRequest_TaskPrototype) MarshalToSizedBufferVT(dAtA []byte) (
 		i--
 		dAtA[i] = 0x22
 	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+	if m.Description != nil {
+		i -= len(*m.Description)
+		copy(dAtA[i:], *m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(*m.Description)))
 		i--
 		dAtA[i] = 0x1a
 	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Name)))
+	if m.Name != nil {
+		i -= len(*m.Name)
+		copy(dAtA[i:], *m.Name)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(*m.Name)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1628,8 +1637,8 @@ func (m *UpdateTasksRequest_TaskPrototype) MarshalToSizedBufferVTStrict(dAtA []b
 		i--
 		dAtA[i] = 0x32
 	}
-	if m.Priority != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Priority))
+	if m.Priority != nil {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(*m.Priority))
 		i--
 		dAtA[i] = 0x28
 	}
@@ -1654,17 +1663,17 @@ func (m *UpdateTasksRequest_TaskPrototype) MarshalToSizedBufferVTStrict(dAtA []b
 		i--
 		dAtA[i] = 0x22
 	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+	if m.Description != nil {
+		i -= len(*m.Description)
+		copy(dAtA[i:], *m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(*m.Description)))
 		i--
 		dAtA[i] = 0x1a
 	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Name)))
+	if m.Name != nil {
+		i -= len(*m.Name)
+		copy(dAtA[i:], *m.Name)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(*m.Name)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1952,12 +1961,12 @@ func (m *UpdateTasksRequest_TaskPrototype) SizeVT() (n int) {
 	if m.Id != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.Id))
 	}
-	l = len(m.Name)
-	if l > 0 {
+	if m.Name != nil {
+		l = len(*m.Name)
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	l = len(m.Description)
-	if l > 0 {
+	if m.Description != nil {
+		l = len(*m.Description)
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	if len(m.Deps) > 0 {
@@ -1967,8 +1976,8 @@ func (m *UpdateTasksRequest_TaskPrototype) SizeVT() (n int) {
 		}
 		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
 	}
-	if m.Priority != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.Priority))
+	if m.Priority != nil {
+		n += 1 + protohelpers.SizeOfVarint(uint64(*m.Priority))
 	}
 	if m.StartTime != nil {
 		l = (*timestamppb1.Timestamp)(m.StartTime).SizeVT()
@@ -2819,7 +2828,8 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Name = string(dAtA[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
+			m.Name = &s
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -2851,7 +2861,8 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Description = string(dAtA[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
+			m.Description = &s
 			iNdEx = postIndex
 		case 4:
 			if wireType == 0 {
@@ -2933,7 +2944,7 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVT(dAtA []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Priority", wireType)
 			}
-			m.Priority = 0
+			var v Priority
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -2943,11 +2954,12 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Priority |= Priority(b&0x7F) << shift
+				v |= Priority(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			m.Priority = &v
 		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StartTime", wireType)
@@ -4152,7 +4164,8 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVTUnsafe(dAtA []byte) error 
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.Name = stringValue
+			s := stringValue
+			m.Name = &s
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -4188,7 +4201,8 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVTUnsafe(dAtA []byte) error 
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.Description = stringValue
+			s := stringValue
+			m.Description = &s
 			iNdEx = postIndex
 		case 4:
 			if wireType == 0 {
@@ -4270,7 +4284,7 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVTUnsafe(dAtA []byte) error 
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Priority", wireType)
 			}
-			m.Priority = 0
+			var v Priority
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -4280,11 +4294,12 @@ func (m *UpdateTasksRequest_TaskPrototype) UnmarshalVTUnsafe(dAtA []byte) error 
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Priority |= Priority(b&0x7F) << shift
+				v |= Priority(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			m.Priority = &v
 		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StartTime", wireType)

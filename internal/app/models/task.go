@@ -9,8 +9,8 @@ type Task struct {
 	Dependencies []int64
 	Priority     Priority
 
-	StartTime  *time.Time
-	FinishTime *time.Time
+	StartTime  time.Time
+	FinishTime time.Time
 
 	CreatedAt time.Time
 	UpdatedAt time.Time

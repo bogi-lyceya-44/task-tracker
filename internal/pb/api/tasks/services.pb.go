@@ -447,12 +447,12 @@ func (x *CreateTasksRequest_TaskPrototype) GetFinishTime() *timestamppb.Timestam
 type UpdateTasksRequest_TaskPrototype struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Description   *string                `protobuf:"bytes,3,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	Deps          []int64                `protobuf:"varint,4,rep,packed,name=deps,proto3" json:"deps,omitempty"`
-	Priority      Priority               `protobuf:"varint,5,opt,name=priority,proto3,enum=api.v1.task_tracker.tasks.Priority" json:"priority,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	FinishTime    *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
+	Priority      *Priority              `protobuf:"varint,5,opt,name=priority,proto3,enum=api.v1.task_tracker.tasks.Priority,oneof" json:"priority,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	FinishTime    *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=finish_time,json=finishTime,proto3,oneof" json:"finish_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -495,15 +495,15 @@ func (x *UpdateTasksRequest_TaskPrototype) GetId() int64 {
 }
 
 func (x *UpdateTasksRequest_TaskPrototype) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UpdateTasksRequest_TaskPrototype) GetDescription() string {
-	if x != nil {
-		return x.Description
+	if x != nil && x.Description != nil {
+		return *x.Description
 	}
 	return ""
 }
@@ -516,8 +516,8 @@ func (x *UpdateTasksRequest_TaskPrototype) GetDeps() []int64 {
 }
 
 func (x *UpdateTasksRequest_TaskPrototype) GetPriority() Priority {
-	if x != nil {
-		return x.Priority
+	if x != nil && x.Priority != nil {
+		return *x.Priority
 	}
 	return Priority_PRIORITY_UNSPECIFIED
 }
@@ -557,19 +557,24 @@ const file_api_tasks_services_proto_rawDesc = "" +
 	"\vfinish_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"finishTime\"'\n" +
 	"\x13CreateTasksResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\x9e\x03\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\xfc\x03\n" +
 	"\x12UpdateTasksRequest\x12c\n" +
-	"\x0ftasks_to_update\x18\x01 \x03(\v2;.api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototypeR\rtasksToUpdate\x1a\xa2\x02\n" +
+	"\x0ftasks_to_update\x18\x01 \x03(\v2;.api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototypeR\rtasksToUpdate\x1a\x80\x03\n" +
 	"\rTaskPrototype\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04deps\x18\x04 \x03(\x03R\x04deps\x12?\n" +
-	"\bpriority\x18\x05 \x01(\x0e2#.api.v1.task_tracker.tasks.PriorityR\bpriority\x129\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
+	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\x03 \x01(\tH\x01R\vdescription\x88\x01\x01\x12\x12\n" +
+	"\x04deps\x18\x04 \x03(\x03R\x04deps\x12D\n" +
+	"\bpriority\x18\x05 \x01(\x0e2#.api.v1.task_tracker.tasks.PriorityH\x02R\bpriority\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x12;\n" +
-	"\vfinish_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"finishTime\"\x15\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12@\n" +
+	"\vfinish_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\n" +
+	"finishTime\x88\x01\x01B\a\n" +
+	"\x05_nameB\x0e\n" +
+	"\f_descriptionB\v\n" +
+	"\t_priorityB\r\n" +
+	"\v_start_timeB\x0e\n" +
+	"\f_finish_time\"\x15\n" +
 	"\x13UpdateTasksResponse\"&\n" +
 	"\x12DeleteTasksRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x03R\x03ids\"\x15\n" +
@@ -639,6 +644,7 @@ func file_api_tasks_services_proto_init() {
 		return
 	}
 	file_api_tasks_models_proto_init()
+	file_api_tasks_services_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
