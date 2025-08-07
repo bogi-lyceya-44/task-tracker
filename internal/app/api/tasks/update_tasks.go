@@ -31,7 +31,8 @@ func (i *Implementation) UpdateTasks(
 		errorCode := codes.Internal
 
 		if errors.Is(err, tasks_service.ErrSelfDependent) ||
-			errors.Is(err, tasks_service.ErrTaskDoesNotExist) {
+			errors.Is(err, tasks_service.ErrTaskDoesNotExist) ||
+			errors.Is(err, tasks_service.ErrCyclicDependency) {
 			errorCode = codes.InvalidArgument
 		}
 

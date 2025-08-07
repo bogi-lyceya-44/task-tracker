@@ -361,6 +361,94 @@ func (*DeleteTasksResponse) Descriptor() ([]byte, []int) {
 	return file_api_tasks_services_proto_rawDescGZIP(), []int{7}
 }
 
+type GetAllDependenciesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllDependenciesRequest) Reset() {
+	*x = GetAllDependenciesRequest{}
+	mi := &file_api_tasks_services_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllDependenciesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllDependenciesRequest) ProtoMessage() {}
+
+func (x *GetAllDependenciesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_tasks_services_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllDependenciesRequest.ProtoReflect.Descriptor instead.
+func (*GetAllDependenciesRequest) Descriptor() ([]byte, []int) {
+	return file_api_tasks_services_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetAllDependenciesRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type GetAllDependenciesResponse struct {
+	state            protoimpl.MessageState                        `protogen:"open.v1"`
+	DependenciesById map[int64]*GetAllDependenciesResponse_IdArray `protobuf:"bytes,1,rep,name=dependencies_by_id,json=dependenciesById,proto3" json:"dependencies_by_id,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetAllDependenciesResponse) Reset() {
+	*x = GetAllDependenciesResponse{}
+	mi := &file_api_tasks_services_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllDependenciesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllDependenciesResponse) ProtoMessage() {}
+
+func (x *GetAllDependenciesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_tasks_services_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllDependenciesResponse.ProtoReflect.Descriptor instead.
+func (*GetAllDependenciesResponse) Descriptor() ([]byte, []int) {
+	return file_api_tasks_services_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetAllDependenciesResponse) GetDependenciesById() map[int64]*GetAllDependenciesResponse_IdArray {
+	if x != nil {
+		return x.DependenciesById
+	}
+	return nil
+}
+
 type CreateTasksRequest_TaskPrototype struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -375,7 +463,7 @@ type CreateTasksRequest_TaskPrototype struct {
 
 func (x *CreateTasksRequest_TaskPrototype) Reset() {
 	*x = CreateTasksRequest_TaskPrototype{}
-	mi := &file_api_tasks_services_proto_msgTypes[8]
+	mi := &file_api_tasks_services_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -387,7 +475,7 @@ func (x *CreateTasksRequest_TaskPrototype) String() string {
 func (*CreateTasksRequest_TaskPrototype) ProtoMessage() {}
 
 func (x *CreateTasksRequest_TaskPrototype) ProtoReflect() protoreflect.Message {
-	mi := &file_api_tasks_services_proto_msgTypes[8]
+	mi := &file_api_tasks_services_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -460,7 +548,7 @@ type UpdateTasksRequest_TaskPrototype struct {
 
 func (x *UpdateTasksRequest_TaskPrototype) Reset() {
 	*x = UpdateTasksRequest_TaskPrototype{}
-	mi := &file_api_tasks_services_proto_msgTypes[9]
+	mi := &file_api_tasks_services_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -472,7 +560,7 @@ func (x *UpdateTasksRequest_TaskPrototype) String() string {
 func (*UpdateTasksRequest_TaskPrototype) ProtoMessage() {}
 
 func (x *UpdateTasksRequest_TaskPrototype) ProtoReflect() protoreflect.Message {
-	mi := &file_api_tasks_services_proto_msgTypes[9]
+	mi := &file_api_tasks_services_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -537,6 +625,50 @@ func (x *UpdateTasksRequest_TaskPrototype) GetFinishTime() *timestamppb.Timestam
 	return nil
 }
 
+type GetAllDependenciesResponse_IdArray struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllDependenciesResponse_IdArray) Reset() {
+	*x = GetAllDependenciesResponse_IdArray{}
+	mi := &file_api_tasks_services_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllDependenciesResponse_IdArray) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllDependenciesResponse_IdArray) ProtoMessage() {}
+
+func (x *GetAllDependenciesResponse_IdArray) ProtoReflect() protoreflect.Message {
+	mi := &file_api_tasks_services_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllDependenciesResponse_IdArray.ProtoReflect.Descriptor instead.
+func (*GetAllDependenciesResponse_IdArray) Descriptor() ([]byte, []int) {
+	return file_api_tasks_services_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *GetAllDependenciesResponse_IdArray) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
 var File_api_tasks_services_proto protoreflect.FileDescriptor
 
 const file_api_tasks_services_proto_rawDesc = "" +
@@ -579,12 +711,22 @@ const file_api_tasks_services_proto_rawDesc = "" +
 	"\x13UpdateTasksResponse\"0\n" +
 	"\x12DeleteTasksRequest\x12\x1a\n" +
 	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"\x15\n" +
-	"\x13DeleteTasksResponse2\xc1\x04\n" +
+	"\x13DeleteTasksResponse\"7\n" +
+	"\x19GetAllDependenciesRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"\xb9\x02\n" +
+	"\x1aGetAllDependenciesResponse\x12y\n" +
+	"\x12dependencies_by_id\x18\x01 \x03(\v2K.api.v1.task_tracker.tasks.GetAllDependenciesResponse.DependenciesByIdEntryR\x10dependenciesById\x1a\x1b\n" +
+	"\aIdArray\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x1a\x82\x01\n" +
+	"\x15DependenciesByIdEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x03R\x03key\x12S\n" +
+	"\x05value\x18\x02 \x01(\v2=.api.v1.task_tracker.tasks.GetAllDependenciesResponse.IdArrayR\x05value:\x028\x012\xee\x05\n" +
 	"\vTaskService\x12\x81\x01\n" +
 	"\bGetTasks\x12*.api.v1.task_tracker.tasks.GetTasksRequest\x1a+.api.v1.task_tracker.tasks.GetTasksResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/v1/get_tasks\x12\x8d\x01\n" +
 	"\vCreateTasks\x12-.api.v1.task_tracker.tasks.CreateTasksRequest\x1a..api.v1.task_tracker.tasks.CreateTasksResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/create_tasks\x12\x8d\x01\n" +
 	"\vUpdateTasks\x12-.api.v1.task_tracker.tasks.UpdateTasksRequest\x1a..api.v1.task_tracker.tasks.UpdateTasksResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/update_tasks\x12\x8d\x01\n" +
-	"\vDeleteTasks\x12-.api.v1.task_tracker.tasks.DeleteTasksRequest\x1a..api.v1.task_tracker.tasks.DeleteTasksResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/delete_tasksBAZ?github.com/bogi-lyceya-44/task-tracker/tasks;task_tracker_tasksb\x06proto3"
+	"\vDeleteTasks\x12-.api.v1.task_tracker.tasks.DeleteTasksRequest\x1a..api.v1.task_tracker.tasks.DeleteTasksResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/delete_tasks\x12\xaa\x01\n" +
+	"\x12GetAllDependencies\x124.api.v1.task_tracker.tasks.GetAllDependenciesRequest\x1a5.api.v1.task_tracker.tasks.GetAllDependenciesResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/v1/get_all_dependenciesBAZ?github.com/bogi-lyceya-44/task-tracker/tasks;task_tracker_tasksb\x06proto3"
 
 var (
 	file_api_tasks_services_proto_rawDescOnce sync.Once
@@ -598,45 +740,53 @@ func file_api_tasks_services_proto_rawDescGZIP() []byte {
 	return file_api_tasks_services_proto_rawDescData
 }
 
-var file_api_tasks_services_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_api_tasks_services_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_api_tasks_services_proto_goTypes = []any{
-	(*GetTasksRequest)(nil),                  // 0: api.v1.task_tracker.tasks.GetTasksRequest
-	(*GetTasksResponse)(nil),                 // 1: api.v1.task_tracker.tasks.GetTasksResponse
-	(*CreateTasksRequest)(nil),               // 2: api.v1.task_tracker.tasks.CreateTasksRequest
-	(*CreateTasksResponse)(nil),              // 3: api.v1.task_tracker.tasks.CreateTasksResponse
-	(*UpdateTasksRequest)(nil),               // 4: api.v1.task_tracker.tasks.UpdateTasksRequest
-	(*UpdateTasksResponse)(nil),              // 5: api.v1.task_tracker.tasks.UpdateTasksResponse
-	(*DeleteTasksRequest)(nil),               // 6: api.v1.task_tracker.tasks.DeleteTasksRequest
-	(*DeleteTasksResponse)(nil),              // 7: api.v1.task_tracker.tasks.DeleteTasksResponse
-	(*CreateTasksRequest_TaskPrototype)(nil), // 8: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype
-	(*UpdateTasksRequest_TaskPrototype)(nil), // 9: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype
-	(*Task)(nil),                             // 10: api.v1.task_tracker.tasks.Task
-	(Priority)(0),                            // 11: api.v1.task_tracker.tasks.Priority
-	(*timestamppb.Timestamp)(nil),            // 12: google.protobuf.Timestamp
+	(*GetTasksRequest)(nil),                    // 0: api.v1.task_tracker.tasks.GetTasksRequest
+	(*GetTasksResponse)(nil),                   // 1: api.v1.task_tracker.tasks.GetTasksResponse
+	(*CreateTasksRequest)(nil),                 // 2: api.v1.task_tracker.tasks.CreateTasksRequest
+	(*CreateTasksResponse)(nil),                // 3: api.v1.task_tracker.tasks.CreateTasksResponse
+	(*UpdateTasksRequest)(nil),                 // 4: api.v1.task_tracker.tasks.UpdateTasksRequest
+	(*UpdateTasksResponse)(nil),                // 5: api.v1.task_tracker.tasks.UpdateTasksResponse
+	(*DeleteTasksRequest)(nil),                 // 6: api.v1.task_tracker.tasks.DeleteTasksRequest
+	(*DeleteTasksResponse)(nil),                // 7: api.v1.task_tracker.tasks.DeleteTasksResponse
+	(*GetAllDependenciesRequest)(nil),          // 8: api.v1.task_tracker.tasks.GetAllDependenciesRequest
+	(*GetAllDependenciesResponse)(nil),         // 9: api.v1.task_tracker.tasks.GetAllDependenciesResponse
+	(*CreateTasksRequest_TaskPrototype)(nil),   // 10: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype
+	(*UpdateTasksRequest_TaskPrototype)(nil),   // 11: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype
+	(*GetAllDependenciesResponse_IdArray)(nil), // 12: api.v1.task_tracker.tasks.GetAllDependenciesResponse.IdArray
+	nil,                           // 13: api.v1.task_tracker.tasks.GetAllDependenciesResponse.DependenciesByIdEntry
+	(*Task)(nil),                  // 14: api.v1.task_tracker.tasks.Task
+	(Priority)(0),                 // 15: api.v1.task_tracker.tasks.Priority
+	(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
 }
 var file_api_tasks_services_proto_depIdxs = []int32{
-	10, // 0: api.v1.task_tracker.tasks.GetTasksResponse.tasks:type_name -> api.v1.task_tracker.tasks.Task
-	8,  // 1: api.v1.task_tracker.tasks.CreateTasksRequest.tasks_to_create:type_name -> api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype
-	9,  // 2: api.v1.task_tracker.tasks.UpdateTasksRequest.tasks_to_update:type_name -> api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype
-	11, // 3: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype.priority:type_name -> api.v1.task_tracker.tasks.Priority
-	12, // 4: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype.start_time:type_name -> google.protobuf.Timestamp
-	12, // 5: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype.finish_time:type_name -> google.protobuf.Timestamp
-	11, // 6: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype.priority:type_name -> api.v1.task_tracker.tasks.Priority
-	12, // 7: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype.start_time:type_name -> google.protobuf.Timestamp
-	12, // 8: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype.finish_time:type_name -> google.protobuf.Timestamp
-	0,  // 9: api.v1.task_tracker.tasks.TaskService.GetTasks:input_type -> api.v1.task_tracker.tasks.GetTasksRequest
-	2,  // 10: api.v1.task_tracker.tasks.TaskService.CreateTasks:input_type -> api.v1.task_tracker.tasks.CreateTasksRequest
-	4,  // 11: api.v1.task_tracker.tasks.TaskService.UpdateTasks:input_type -> api.v1.task_tracker.tasks.UpdateTasksRequest
-	6,  // 12: api.v1.task_tracker.tasks.TaskService.DeleteTasks:input_type -> api.v1.task_tracker.tasks.DeleteTasksRequest
-	1,  // 13: api.v1.task_tracker.tasks.TaskService.GetTasks:output_type -> api.v1.task_tracker.tasks.GetTasksResponse
-	3,  // 14: api.v1.task_tracker.tasks.TaskService.CreateTasks:output_type -> api.v1.task_tracker.tasks.CreateTasksResponse
-	5,  // 15: api.v1.task_tracker.tasks.TaskService.UpdateTasks:output_type -> api.v1.task_tracker.tasks.UpdateTasksResponse
-	7,  // 16: api.v1.task_tracker.tasks.TaskService.DeleteTasks:output_type -> api.v1.task_tracker.tasks.DeleteTasksResponse
-	13, // [13:17] is the sub-list for method output_type
-	9,  // [9:13] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	14, // 0: api.v1.task_tracker.tasks.GetTasksResponse.tasks:type_name -> api.v1.task_tracker.tasks.Task
+	10, // 1: api.v1.task_tracker.tasks.CreateTasksRequest.tasks_to_create:type_name -> api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype
+	11, // 2: api.v1.task_tracker.tasks.UpdateTasksRequest.tasks_to_update:type_name -> api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype
+	13, // 3: api.v1.task_tracker.tasks.GetAllDependenciesResponse.dependencies_by_id:type_name -> api.v1.task_tracker.tasks.GetAllDependenciesResponse.DependenciesByIdEntry
+	15, // 4: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype.priority:type_name -> api.v1.task_tracker.tasks.Priority
+	16, // 5: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype.start_time:type_name -> google.protobuf.Timestamp
+	16, // 6: api.v1.task_tracker.tasks.CreateTasksRequest.TaskPrototype.finish_time:type_name -> google.protobuf.Timestamp
+	15, // 7: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype.priority:type_name -> api.v1.task_tracker.tasks.Priority
+	16, // 8: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype.start_time:type_name -> google.protobuf.Timestamp
+	16, // 9: api.v1.task_tracker.tasks.UpdateTasksRequest.TaskPrototype.finish_time:type_name -> google.protobuf.Timestamp
+	12, // 10: api.v1.task_tracker.tasks.GetAllDependenciesResponse.DependenciesByIdEntry.value:type_name -> api.v1.task_tracker.tasks.GetAllDependenciesResponse.IdArray
+	0,  // 11: api.v1.task_tracker.tasks.TaskService.GetTasks:input_type -> api.v1.task_tracker.tasks.GetTasksRequest
+	2,  // 12: api.v1.task_tracker.tasks.TaskService.CreateTasks:input_type -> api.v1.task_tracker.tasks.CreateTasksRequest
+	4,  // 13: api.v1.task_tracker.tasks.TaskService.UpdateTasks:input_type -> api.v1.task_tracker.tasks.UpdateTasksRequest
+	6,  // 14: api.v1.task_tracker.tasks.TaskService.DeleteTasks:input_type -> api.v1.task_tracker.tasks.DeleteTasksRequest
+	8,  // 15: api.v1.task_tracker.tasks.TaskService.GetAllDependencies:input_type -> api.v1.task_tracker.tasks.GetAllDependenciesRequest
+	1,  // 16: api.v1.task_tracker.tasks.TaskService.GetTasks:output_type -> api.v1.task_tracker.tasks.GetTasksResponse
+	3,  // 17: api.v1.task_tracker.tasks.TaskService.CreateTasks:output_type -> api.v1.task_tracker.tasks.CreateTasksResponse
+	5,  // 18: api.v1.task_tracker.tasks.TaskService.UpdateTasks:output_type -> api.v1.task_tracker.tasks.UpdateTasksResponse
+	7,  // 19: api.v1.task_tracker.tasks.TaskService.DeleteTasks:output_type -> api.v1.task_tracker.tasks.DeleteTasksResponse
+	9,  // 20: api.v1.task_tracker.tasks.TaskService.GetAllDependencies:output_type -> api.v1.task_tracker.tasks.GetAllDependenciesResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_tasks_services_proto_init() }
@@ -645,14 +795,14 @@ func file_api_tasks_services_proto_init() {
 		return
 	}
 	file_api_tasks_models_proto_init()
-	file_api_tasks_services_proto_msgTypes[9].OneofWrappers = []any{}
+	file_api_tasks_services_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_tasks_services_proto_rawDesc), len(file_api_tasks_services_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

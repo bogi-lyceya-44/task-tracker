@@ -12,6 +12,7 @@ type TaskService interface {
 	InsertTasks(ctx context.Context, tasks []models.Task) ([]int64, error)
 	UpdateTasks(ctx context.Context, tasks []models.UpdatedTask) error
 	DeleteTasks(ctx context.Context, ids []int64) error
+	GetDependencies(ctx context.Context, ids []int64) (map[int64][]int64, error)
 }
 
 type Implementation struct {

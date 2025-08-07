@@ -60,7 +60,7 @@ func (s *TopicService) checkForTaskExistence(
 				strconv.Itoa,
 			)
 
-			return errors.WithMessagef(
+			return errors.Wrapf(
 				ErrTaskDoesNotExist,
 				"ids: %v",
 				strings.Join(stringified, ","),

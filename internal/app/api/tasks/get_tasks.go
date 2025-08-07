@@ -18,6 +18,7 @@ func (i *Implementation) GetTasks(
 	}
 
 	ids := utils.Unique(req.GetIds())
+
 	tasks, err := i.taskService.GetTasks(ctx, ids)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "getting tasks: %v", err)

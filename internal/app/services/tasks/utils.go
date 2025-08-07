@@ -30,7 +30,7 @@ func (s *TaskService) checkForSelfDependency(pairs []idWithDependencies) error {
 			},
 		)
 
-		return errors.WithMessagef(
+		return errors.Wrapf(
 			ErrSelfDependent,
 			"tasks: %v",
 			strings.Join(ids, ","),
@@ -89,12 +89,38 @@ func (s *TaskService) checkForTaskDependencyExistence(
 				strconv.Itoa,
 			)
 
-			return errors.WithMessagef(
+			return errors.Wrapf(
 				ErrTaskDoesNotExist,
 				"tasks: %v",
 				strings.Join(stringified, ","),
 			)
 		}
+	}
+
+	return nil
+}
+
+func (s *TaskService) checkForCyclicDependency(
+	ctx context.Context,
+	pair idWithDependencies,
+) error {
+	var deps []int64
+
+	for _, dependency := range pair.Second {
+		fetched, err := s.storage.GetDependencies(ctx, dependency)
+		if err != nil {
+			return errors.Wrap(err, "getting dependencies")
+		}
+
+		deps = append(deps, fetched...)
+	}
+
+	if slices.Contains(deps, pair.First) {
+		return errors.Wrapf(
+			ErrCyclicDependency,
+			"task %d",
+			pair.First,
+		)
 	}
 
 	return nil

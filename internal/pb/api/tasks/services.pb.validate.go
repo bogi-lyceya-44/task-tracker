@@ -993,6 +993,267 @@ var _ interface {
 	ErrorName() string
 } = DeleteTasksResponseValidationError{}
 
+// Validate checks the field values on GetAllDependenciesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAllDependenciesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAllDependenciesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAllDependenciesRequestMultiError, or nil if none found.
+func (m *GetAllDependenciesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAllDependenciesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(m.GetIds()) < 1 {
+		err := GetAllDependenciesRequestValidationError{
+			field:  "Ids",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetAllDependenciesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAllDependenciesRequestMultiError is an error wrapping multiple validation
+// errors returned by GetAllDependenciesRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetAllDependenciesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAllDependenciesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAllDependenciesRequestMultiError) AllErrors() []error { return m }
+
+// GetAllDependenciesRequestValidationError is the validation error returned by
+// GetAllDependenciesRequest.Validate if the designated constraints aren't met.
+type GetAllDependenciesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAllDependenciesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAllDependenciesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAllDependenciesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAllDependenciesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAllDependenciesRequestValidationError) ErrorName() string {
+	return "GetAllDependenciesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAllDependenciesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAllDependenciesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAllDependenciesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAllDependenciesRequestValidationError{}
+
+// Validate checks the field values on GetAllDependenciesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAllDependenciesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAllDependenciesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAllDependenciesResponseMultiError, or nil if none found.
+func (m *GetAllDependenciesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAllDependenciesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	{
+		sorted_keys := make([]int64, len(m.GetDependenciesById()))
+		i := 0
+		for key := range m.GetDependenciesById() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetDependenciesById()[key]
+			_ = val
+
+			// no validation rules for DependenciesById[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, GetAllDependenciesResponseValidationError{
+							field:  fmt.Sprintf("DependenciesById[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, GetAllDependenciesResponseValidationError{
+							field:  fmt.Sprintf("DependenciesById[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return GetAllDependenciesResponseValidationError{
+						field:  fmt.Sprintf("DependenciesById[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetAllDependenciesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAllDependenciesResponseMultiError is an error wrapping multiple
+// validation errors returned by GetAllDependenciesResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetAllDependenciesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAllDependenciesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAllDependenciesResponseMultiError) AllErrors() []error { return m }
+
+// GetAllDependenciesResponseValidationError is the validation error returned
+// by GetAllDependenciesResponse.Validate if the designated constraints aren't met.
+type GetAllDependenciesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAllDependenciesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAllDependenciesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAllDependenciesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAllDependenciesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAllDependenciesResponseValidationError) ErrorName() string {
+	return "GetAllDependenciesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAllDependenciesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAllDependenciesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAllDependenciesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAllDependenciesResponseValidationError{}
+
 // Validate checks the field values on CreateTasksRequest_TaskPrototype with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -1386,3 +1647,108 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateTasksRequest_TaskPrototypeValidationError{}
+
+// Validate checks the field values on GetAllDependenciesResponse_IdArray with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAllDependenciesResponse_IdArray) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAllDependenciesResponse_IdArray
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAllDependenciesResponse_IdArrayMultiError, or nil if none found.
+func (m *GetAllDependenciesResponse_IdArray) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAllDependenciesResponse_IdArray) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetAllDependenciesResponse_IdArrayMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAllDependenciesResponse_IdArrayMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAllDependenciesResponse_IdArray.ValidateAll() if the designated
+// constraints aren't met.
+type GetAllDependenciesResponse_IdArrayMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAllDependenciesResponse_IdArrayMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAllDependenciesResponse_IdArrayMultiError) AllErrors() []error { return m }
+
+// GetAllDependenciesResponse_IdArrayValidationError is the validation error
+// returned by GetAllDependenciesResponse_IdArray.Validate if the designated
+// constraints aren't met.
+type GetAllDependenciesResponse_IdArrayValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAllDependenciesResponse_IdArrayValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAllDependenciesResponse_IdArrayValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAllDependenciesResponse_IdArrayValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAllDependenciesResponse_IdArrayValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAllDependenciesResponse_IdArrayValidationError) ErrorName() string {
+	return "GetAllDependenciesResponse_IdArrayValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAllDependenciesResponse_IdArrayValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAllDependenciesResponse_IdArray.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAllDependenciesResponse_IdArrayValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAllDependenciesResponse_IdArrayValidationError{}

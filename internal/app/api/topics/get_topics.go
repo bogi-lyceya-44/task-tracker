@@ -18,6 +18,7 @@ func (i *Implementation) GetTopics(
 	}
 
 	ids := utils.Unique(req.GetIds())
+
 	tasks, err := i.topicService.GetTopics(ctx, ids)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "getting topics: %v", err)

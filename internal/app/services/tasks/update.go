@@ -34,5 +34,11 @@ func (s *TaskService) UpdateTasks(
 		return errors.Wrap(err, "checking task existence")
 	}
 
+	for _, pair := range idsWithDependencies {
+		if err := s.checkForCyclicDependency(ctx, pair); err != nil {
+			return errors.Wrap(err, "checking cyclic dependency")
+		}
+	}
+
 	return s.storage.UpdateTasks(ctx, tasks)
 }

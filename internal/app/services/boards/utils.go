@@ -60,7 +60,7 @@ func (s *BoardService) checkForTopicExistence(
 				strconv.Itoa,
 			)
 
-			return errors.WithMessagef(
+			return errors.Wrapf(
 				ErrTopicDoesNotExist,
 				"ids: %v",
 				strings.Join(stringified, ","),

@@ -18,6 +18,7 @@ func (i *Implementation) GetBoards(
 	}
 
 	ids := utils.Unique(req.GetIds())
+
 	tasks, err := i.boardService.GetBoards(ctx, ids)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "getting boards: %v", err)
