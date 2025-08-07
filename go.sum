@@ -1,7 +1,7 @@
 github.com/Masterminds/squirrel v1.5.4 h1:uUcX/aBc8O7Fg9kaISIUsHXdKuqehiXAMQTYX8afzqM=
 github.com/Masterminds/squirrel v1.5.4/go.mod h1:NNaOrjSoIDfDA40n7sr2tPNZRfjzjA400rg+riTZj10=
-github.com/bogi-lyceya-44/common v0.0.5 h1:az4GpB1NBYgsivjJuzZt9GaMbrtQZUD64MACZBs+muo=
-github.com/bogi-lyceya-44/common v0.0.5/go.mod h1:n1/bnpYDDxWvOJfwxopyIbZ7RPqdZF02JvcLHZvrnvs=
+github.com/bogi-lyceya-44/common v0.0.6 h1:SokKFxHUgzWCEhkHTMuopW9PFafe/uP9KSPskhhgnaA=
+github.com/bogi-lyceya-44/common v0.0.6/go.mod h1:n1/bnpYDDxWvOJfwxopyIbZ7RPqdZF02JvcLHZvrnvs=
 github.com/caarlos0/env/v11 v11.3.1 h1:cArPWC15hWmEt+gWk7YBi7lEXTXCvpaSdCiZE2X5mCA=
 github.com/caarlos0/env/v11 v11.3.1/go.mod h1:qupehSf/Y0TUTsxKywqRt/vJjN5nz6vauiYEUUr8P4U=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

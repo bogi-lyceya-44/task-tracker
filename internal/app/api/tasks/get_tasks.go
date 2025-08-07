@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/bogi-lyceya-44/common/pkg/utils"
-	"github.com/bogi-lyceya-44/task-tracker/internal/app/models"
 	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -19,20 +18,12 @@ func (i *Implementation) GetTasks(
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	var mappingError error
-	mappedTasks := utils.Map(
+	mappedTasks, err := utils.MapWithError(
 		tasks,
-		func(task models.Task) *desc.Task {
-			result, err := MapDomainTaskToProto(task)
-			if err != nil {
-				mappingError = err
-			}
-			return result
-		},
+		MapDomainTaskToProto,
 	)
-
-	if mappingError != nil {
-		return nil, status.Error(codes.Internal, mappingError.Error())
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
 	}
 
 	return &desc.GetTasksResponse{Tasks: mappedTasks}, nil
