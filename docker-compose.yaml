@@ -18,7 +18,7 @@ services:
       retries: 5
 
   task_tracker:
-    image: <insert image here>
+    image: ghcr.io/bogi-lyceya-44/task-tracker:master
     container_name: task_tracker
     environment:
       POSTGRES_URL: postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable&search_path=task_tracker
@@ -28,6 +28,7 @@ services:
       GRPC_PORT: 7001
     ports:
       - 7000:7000
+      - 7001:7001
     depends_on:
       postgres:
         condition: service_healthy
