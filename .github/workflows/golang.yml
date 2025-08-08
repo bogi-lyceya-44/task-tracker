@@ -1,0 +1,30 @@
+name: build & test
+
+on:
+  push:
+    branches:
+      - feat/*
+      - release/*
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: setup
+        uses: actions/setup-go@v5
+        with:
+          go-version: ">=1.24.0"
+
+      - name: go build
+        run: go build -v ./...
+
+      - name: go test
+        run: go test -v -race ./...
+
+      - name: go lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.64.6

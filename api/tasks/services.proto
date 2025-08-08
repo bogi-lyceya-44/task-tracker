@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/tasks;task_tracker_tasks";
+
+package api.v1.task_tracker.tasks;
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "api/tasks/models.proto";
+
+service TaskService {
+    rpc GetTasks(GetTasksRequest) returns (GetTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_tasks"
+            body: "*"
+        };
+    }
+
+    rpc CreateTasks(CreateTasksRequest) returns (CreateTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/create_tasks"
+            body: "*"
+        };
+    }
+
+    rpc UpdateTasks(UpdateTasksRequest) returns (UpdateTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/update_tasks"
+            body: "*"
+        };
+    }
+
+    rpc DeleteTasks(DeleteTasksRequest) returns (DeleteTasksResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/delete_tasks"
+            body: "*"
+        };
+    }
+
+    // GetAllDependencies fetches all (direct and indirect) dependencies
+    // of tasks.
+    rpc GetAllDependencies(GetAllDependenciesRequest)
+        returns (GetAllDependenciesResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_all_dependencies"
+            body: "*"
+        };
+    }
+}
+
+message GetTasksRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message GetTasksResponse {
+    repeated Task tasks = 1;
+}
+
+message CreateTasksRequest {
+    message TaskPrototype {
+        string name = 1 [(validate.rules).string.min_len = 1];
+        string description = 2 [(validate.rules).string.min_len = 1];
+        repeated int64 deps = 3;
+        Priority priority = 4;
+
+        google.protobuf.Timestamp start_time = 5;
+        google.protobuf.Timestamp finish_time = 6;
+    }
+
+    repeated TaskPrototype tasks_to_create = 1
+        [(validate.rules).repeated.min_items = 1];
+}
+
+message CreateTasksResponse {
+    repeated int64 ids = 1;
+}
+
+message UpdateTasksRequest {
+    message TaskPrototype {
+        int64 id = 1;
+        optional string name = 2 [(validate.rules).string.min_len = 1];
+        optional string description = 3 [(validate.rules).string.min_len = 1];
+        repeated int64 deps = 4;
+        optional Priority priority = 5;
+
+        optional google.protobuf.Timestamp start_time = 6;
+        optional google.protobuf.Timestamp finish_time = 7;
+    }
+
+    repeated TaskPrototype tasks_to_update = 1
+        [(validate.rules).repeated.min_items = 1];
+}
+
+message UpdateTasksResponse {}
+
+message DeleteTasksRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message DeleteTasksResponse {}
+
+message GetAllDependenciesRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message GetAllDependenciesResponse {
+    message IdArray {
+        repeated int64 ids = 1;
+    }
+
+    map<int64, IdArray> dependencies_by_id = 1;
+}
