@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/topics;task_tracker_topics";
+
+package api.v1.task_tracker.topics;
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "api/topics/models.proto";
+
+service TopicService {
+    rpc GetTopics(GetTopicsRequest) returns (GetTopicsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_topics"
+            body: "*"
+        };
+    }
+
+    rpc CreateTopics(CreateTopicsRequest) returns (CreateTopicsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/create_topics"
+            body: "*"
+        };
+    }
+
+    rpc UpdateTopics(UpdateTopicsRequest) returns (UpdateTopicsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/update_topics"
+            body: "*"
+        };
+    }
+
+    rpc DeleteTopics(DeleteTopicsRequest) returns (DeleteTopicsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/delete_topics"
+            body: "*"
+        };
+    }
+}
+
+message GetTopicsRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message GetTopicsResponse {
+    repeated Topic topics = 1;
+}
+
+message CreateTopicsRequest {
+    message TopicPrototype {
+        string name = 1 [(validate.rules).string.min_len = 1];
+        repeated int64 task_ids = 2;
+    }
+
+    repeated TopicPrototype topics_to_create = 1
+        [(validate.rules).repeated.min_items = 1];
+}
+
+message CreateTopicsResponse {
+    repeated int64 ids = 1;
+}
+
+message UpdateTopicsRequest {
+    message TopicPrototype {
+        int64 id = 1;
+        optional string name = 2 [(validate.rules).string.min_len = 1];
+        repeated int64 task_ids = 3;
+    }
+
+    repeated TopicPrototype topics_to_update = 1
+        [(validate.rules).repeated.min_items = 1];
+}
+
+message UpdateTopicsResponse {}
+
+message DeleteTopicsRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message DeleteTopicsResponse {}

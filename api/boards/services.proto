@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option go_package = "github.com/bogi-lyceya-44/task-tracker/boards;task_tracker_boards";
+
+package api.v1.task_tracker.boards;
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "api/boards/models.proto";
+
+service BoardService {
+    rpc GetBoards(GetBoardsRequest) returns (GetBoardsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_boards"
+            body: "*"
+        };
+    }
+
+    rpc CreateBoards(CreateBoardsRequest) returns (CreateBoardsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/create_boards"
+            body: "*"
+        };
+    }
+
+    rpc UpdateBoards(UpdateBoardsRequest) returns (UpdateBoardsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/update_boards"
+            body: "*"
+        };
+    }
+
+    rpc DeleteBoards(DeleteBoardsRequest) returns (DeleteBoardsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/delete_boards"
+            body: "*"
+        };
+    }
+}
+
+message GetBoardsRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message GetBoardsResponse {
+    repeated Board boards = 1;
+}
+
+message CreateBoardsRequest {
+    message BoardPrototype {
+        string name = 1 [(validate.rules).string.min_len = 1];
+        repeated int64 topic_ids = 2;
+    }
+
+    repeated BoardPrototype boards_to_create = 1
+        [(validate.rules).repeated.min_items = 1];
+}
+
+message CreateBoardsResponse {
+    repeated int64 ids = 1;
+}
+
+message UpdateBoardsRequest {
+    message BoardPrototype {
+        int64 id = 1;
+        optional string name = 2 [(validate.rules).string.min_len = 1];
+        repeated int64 topic_ids = 3;
+    }
+
+    repeated BoardPrototype boards_to_update = 1
+        [(validate.rules).repeated.min_items = 1];
+}
+
+message UpdateBoardsResponse {}
+
+message DeleteBoardsRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message DeleteBoardsResponse {}
