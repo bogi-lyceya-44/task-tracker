@@ -36,4 +36,3 @@ func (s *BoardStorage) GetOrder(ctx context.Context) ([]utils.Pair[int64, int32]
 
 	return fetched, nil
 }
-
