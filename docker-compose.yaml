@@ -19,6 +19,7 @@ services:
 
   task_tracker:
     image: ghcr.io/bogi-lyceya-44/task-tracker:master
+    pull_policy: always
     container_name: task_tracker
     environment:
       POSTGRES_URL: postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable&search_path=task_tracker
