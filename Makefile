@@ -91,7 +91,18 @@ fast-generate: .generate
 	find . -iname "*.swagger.json" -print0 | xargs -0 $(LOCAL_BIN)/go-swagger-merger -o docs/swagger.json
 
 enum: .enum
-
 .enum:
 	go install github.com/abice/go-enum@latest
 	go generate ./...
+
+pg-up: .pgup
+.pgup:
+	docker-compose up -d postgres
+
+pg-down: .pgdown
+.pgdown:
+	docker-compose down -v postgres
+
+migrate: .migrate
+.migrate:
+	goose -dir migrations postgres "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable" up

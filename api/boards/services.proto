@@ -54,6 +54,21 @@ service BoardService {
             body: "*"
         };
     }
+
+    rpc GetBoardOrder(GetBoardOrderRequest) returns (GetBoardOrderResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_board_order"
+            body: "*"
+        };
+    }
+
+    rpc ChangeBoardOrder(ChangeBoardOrderRequest)
+        returns (ChangeBoardOrderResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/change_board_order"
+            body: "*"
+        };
+    }
 }
 
 message GetBoardsRequest {
@@ -113,4 +128,21 @@ message GetAllBoardsRequest {}
 
 message GetAllBoardsResponse {
     repeated Board boards = 1;
+}
+
+message BoardOrder {
+    int64 board_id = 1;
+    int32 place = 2 [(validate.rules).int32.gt = 0];
+}
+
+message ChangeBoardOrderRequest {
+    repeated BoardOrder changes = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message ChangeBoardOrderResponse {}
+
+message GetBoardOrderRequest {}
+
+message GetBoardOrderResponse {
+    map<int64, int32> order = 1;
 }

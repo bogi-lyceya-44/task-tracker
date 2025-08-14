@@ -3,6 +3,7 @@ package boards
 import (
 	"context"
 
+	"github.com/bogi-lyceya-44/common/pkg/utils"
 	"github.com/bogi-lyceya-44/task-tracker/internal/app/models"
 	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/boards"
 )
@@ -12,6 +13,9 @@ type BoardService interface {
 	InsertBoards(ctx context.Context, boards []models.Board) ([]int64, error)
 	UpdateBoards(ctx context.Context, boards []models.UpdatedBoard) error
 	DeleteBoards(ctx context.Context, ids []int64) error
+
+	GetOrder(ctx context.Context) ([]utils.Pair[int64, int32], error)
+	ChangeOrder(ctx context.Context, ids []int64, places []int32) error
 }
 
 type TopicService interface {

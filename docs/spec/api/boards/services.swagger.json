@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/change_board_order": {
+      "post": {
+        "operationId": "BoardService_ChangeBoardOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/boardsChangeBoardOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/boardsChangeBoardOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BoardService"
+        ]
+      }
+    },
     "/api/v1/create_boards": {
       "post": {
         "operationId": "BoardService_CreateBoards",
@@ -144,6 +176,38 @@
         ]
       }
     },
+    "/api/v1/get_board_order": {
+      "post": {
+        "operationId": "BoardService_GetBoardOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/boardsGetBoardOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/boardsGetBoardOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BoardService"
+        ]
+      }
+    },
     "/api/v1/get_boards": {
       "post": {
         "operationId": "BoardService_GetBoards",
@@ -249,6 +313,34 @@
         }
       }
     },
+    "boardsBoardOrder": {
+      "type": "object",
+      "properties": {
+        "boardId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "place": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "boardsChangeBoardOrderRequest": {
+      "type": "object",
+      "properties": {
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/boardsBoardOrder"
+          }
+        }
+      }
+    },
+    "boardsChangeBoardOrderResponse": {
+      "type": "object"
+    },
     "boardsCreateBoardsRequest": {
       "type": "object",
       "properties": {
@@ -337,6 +429,21 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/GetBoardContentResponseBoardContent"
+          }
+        }
+      }
+    },
+    "boardsGetBoardOrderRequest": {
+      "type": "object"
+    },
+    "boardsGetBoardOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       }

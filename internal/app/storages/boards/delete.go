@@ -12,7 +12,7 @@ func (s *BoardStorage) DeleteBoards(
 	ids []int64,
 ) error {
 	sql, args, err := sq.
-		Update(tableName).
+		Update(boardsTableName).
 		Set(columnIsDeleted, true).
 		Where(map[string]any{
 			columnID: ids,

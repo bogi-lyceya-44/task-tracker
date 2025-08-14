@@ -24,7 +24,7 @@ func (s *BoardStorage) GetBoards(
 
 	sql, args, err := sq.
 		Select(allColumns...).
-		From(tableName).
+		From(boardsTableName).
 		Where(filters).
 		PlaceholderFormat(sq.Dollar).
 		ToSql()

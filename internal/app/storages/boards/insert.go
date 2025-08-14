@@ -15,7 +15,7 @@ func (s *BoardStorage) InsertBoards(
 	boards []models.Board,
 ) ([]int64, error) {
 	builder := sq.
-		Insert(tableName).
+		Insert(boardsTableName).
 		Columns(
 			columnName,
 			columnTopicIDs,
