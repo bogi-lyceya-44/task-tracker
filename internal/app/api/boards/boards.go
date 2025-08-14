@@ -14,14 +14,30 @@ type BoardService interface {
 	DeleteBoards(ctx context.Context, ids []int64) error
 }
 
+type TopicService interface {
+	GetTopics(ctx context.Context, ids []int64) ([]models.Topic, error)
+}
+
+type TaskService interface {
+	GetTasks(ctx context.Context, ids []int64) ([]models.Task, error)
+}
+
 type Implementation struct {
 	desc.UnimplementedBoardServiceServer
 
 	boardService BoardService
+	topicService TopicService
+	taskService  TaskService
 }
 
-func New(boardService BoardService) *Implementation {
+func New(
+	boardService BoardService,
+	topicService TopicService,
+	taskService TaskService,
+) *Implementation {
 	return &Implementation{
 		boardService: boardService,
+		topicService: topicService,
+		taskService:  taskService,
 	}
 }

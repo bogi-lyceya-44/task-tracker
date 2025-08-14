@@ -210,7 +210,7 @@ const file_api_tasks_models_proto_rawDesc = "" +
 	"\fPRIORITY_LOW\x10\x01\x12\x13\n" +
 	"\x0fPRIORITY_MEDIUM\x10\x02\x12\x11\n" +
 	"\rPRIORITY_HIGH\x10\x03\x12\x15\n" +
-	"\x11PRIORITY_CRITICAL\x10\x04BAZ?github.com/bogi-lyceya-44/task-tracker/tasks;task_tracker_tasksb\x06proto3"
+	"\x11PRIORITY_CRITICAL\x10\x04BQZOgithub.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks;task_tracker_tasksb\x06proto3"
 
 var (
 	file_api_tasks_models_proto_rawDescOnce sync.Once

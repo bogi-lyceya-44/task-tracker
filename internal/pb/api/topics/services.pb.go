@@ -504,7 +504,7 @@ const file_api_topics_services_proto_rawDesc = "" +
 	"\tGetTopics\x12,.api.v1.task_tracker.topics.GetTopicsRequest\x1a-.api.v1.task_tracker.topics.GetTopicsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/get_topics\x12\x93\x01\n" +
 	"\fCreateTopics\x12/.api.v1.task_tracker.topics.CreateTopicsRequest\x1a0.api.v1.task_tracker.topics.CreateTopicsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/create_topics\x12\x93\x01\n" +
 	"\fUpdateTopics\x12/.api.v1.task_tracker.topics.UpdateTopicsRequest\x1a0.api.v1.task_tracker.topics.UpdateTopicsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/update_topics\x12\x93\x01\n" +
-	"\fDeleteTopics\x12/.api.v1.task_tracker.topics.DeleteTopicsRequest\x1a0.api.v1.task_tracker.topics.DeleteTopicsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/delete_topicsBCZAgithub.com/bogi-lyceya-44/task-tracker/topics;task_tracker_topicsb\x06proto3"
+	"\fDeleteTopics\x12/.api.v1.task_tracker.topics.DeleteTopicsRequest\x1a0.api.v1.task_tracker.topics.DeleteTopicsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/delete_topicsBSZQgithub.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics;task_tracker_topicsb\x06proto3"
 
 var (
 	file_api_topics_services_proto_rawDescOnce sync.Once

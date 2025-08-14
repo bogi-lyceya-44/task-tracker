@@ -14,13 +14,18 @@ func (s *BoardStorage) GetBoards(
 	ctx context.Context,
 	ids []int64,
 ) ([]models.Board, error) {
+	filters := map[string]any{
+		columnIsDeleted: false,
+	}
+
+	if len(ids) > 0 {
+		filters[columnID] = ids
+	}
+
 	sql, args, err := sq.
 		Select(allColumns...).
 		From(tableName).
-		Where(map[string]any{
-			columnID:        ids,
-			columnIsDeleted: false,
-		}).
+		Where(filters).
 		PlaceholderFormat(sq.Dollar).
 		ToSql()
 	if err != nil {

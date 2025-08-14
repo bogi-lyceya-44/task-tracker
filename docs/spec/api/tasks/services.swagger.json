@@ -82,7 +82,7 @@
     },
     "/api/v1/get_all_dependencies": {
       "post": {
-        "summary": "GetAllDependencies fetches all (direct and indirect) dependencies\nof tasks.",
+        "summary": "Fetches all (direct and indirect) dependencies of tasks.",
         "operationId": "TaskService_GetAllDependencies",
         "responses": {
           "200": {

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/bogi-lyceya-44/task-tracker/tasks;task_tracker_tasks";
+option go_package = "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks;task_tracker_tasks";
 
 package api.v1.task_tracker.tasks;
 
@@ -38,8 +38,7 @@ service TaskService {
         };
     }
 
-    // GetAllDependencies fetches all (direct and indirect) dependencies
-    // of tasks.
+    // Fetches all (direct and indirect) dependencies of tasks.
     rpc GetAllDependencies(GetAllDependenciesRequest)
         returns (GetAllDependenciesResponse) {
         option (google.api.http) = {

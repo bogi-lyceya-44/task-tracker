@@ -44,7 +44,7 @@ func MapDomainTaskPriorityToProto(priority models.Priority) (desc.Priority, erro
 }
 
 func MapCreateTaskPrototypeToDomain(task *desc.CreateTasksRequest_TaskPrototype) (models.Task, error) {
-	priority, err := MapTaskPriorityToDomain(task.Priority)
+	priority, err := MapTaskPriorityToDomain(task.GetPriority())
 	if err != nil {
 		return models.Task{}, errors.Wrap(err, "mapping create task prototype")
 	}
