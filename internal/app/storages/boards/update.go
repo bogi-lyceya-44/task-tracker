@@ -27,7 +27,7 @@ func (s *BoardStorage) UpdateBoards(
 		}
 
 		sql, args, err := sq.
-			Update(tableName).
+			Update(boardsTableName).
 			Where(
 				sq.Eq{
 					columnID: board.ID,

@@ -1,7 +1,8 @@
 package boards
 
 const (
-	tableName = "boards"
+	boardsTableName = "boards"
+	orderTableName  = "board_order"
 
 	columnID        = "id"
 	columnName      = "name"
@@ -9,6 +10,7 @@ const (
 	columnCreatedAt = "created_at"
 	columnUpdatedAt = "updated_at"
 	columnIsDeleted = "is_deleted"
+	columnPlace     = "place"
 )
 
 var allColumns = []string{

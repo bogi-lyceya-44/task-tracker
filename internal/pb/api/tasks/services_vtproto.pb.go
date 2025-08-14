@@ -707,8 +707,7 @@ type TaskServiceClient interface {
 	CreateTasks(ctx context.Context, in *CreateTasksRequest, opts ...grpc.CallOption) (*CreateTasksResponse, error)
 	UpdateTasks(ctx context.Context, in *UpdateTasksRequest, opts ...grpc.CallOption) (*UpdateTasksResponse, error)
 	DeleteTasks(ctx context.Context, in *DeleteTasksRequest, opts ...grpc.CallOption) (*DeleteTasksResponse, error)
-	// GetAllDependencies fetches all (direct and indirect) dependencies
-	// of tasks.
+	// Fetches all (direct and indirect) dependencies of tasks.
 	GetAllDependencies(ctx context.Context, in *GetAllDependenciesRequest, opts ...grpc.CallOption) (*GetAllDependenciesResponse, error)
 }
 
@@ -773,8 +772,7 @@ type TaskServiceServer interface {
 	CreateTasks(context.Context, *CreateTasksRequest) (*CreateTasksResponse, error)
 	UpdateTasks(context.Context, *UpdateTasksRequest) (*UpdateTasksResponse, error)
 	DeleteTasks(context.Context, *DeleteTasksRequest) (*DeleteTasksResponse, error)
-	// GetAllDependencies fetches all (direct and indirect) dependencies
-	// of tasks.
+	// Fetches all (direct and indirect) dependencies of tasks.
 	GetAllDependencies(context.Context, *GetAllDependenciesRequest) (*GetAllDependenciesResponse, error)
 	mustEmbedUnimplementedTaskServiceServer()
 }

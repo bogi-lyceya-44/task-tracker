@@ -726,7 +726,7 @@ const file_api_tasks_services_proto_rawDesc = "" +
 	"\vCreateTasks\x12-.api.v1.task_tracker.tasks.CreateTasksRequest\x1a..api.v1.task_tracker.tasks.CreateTasksResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/create_tasks\x12\x8d\x01\n" +
 	"\vUpdateTasks\x12-.api.v1.task_tracker.tasks.UpdateTasksRequest\x1a..api.v1.task_tracker.tasks.UpdateTasksResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/update_tasks\x12\x8d\x01\n" +
 	"\vDeleteTasks\x12-.api.v1.task_tracker.tasks.DeleteTasksRequest\x1a..api.v1.task_tracker.tasks.DeleteTasksResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/delete_tasks\x12\xaa\x01\n" +
-	"\x12GetAllDependencies\x124.api.v1.task_tracker.tasks.GetAllDependenciesRequest\x1a5.api.v1.task_tracker.tasks.GetAllDependenciesResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/v1/get_all_dependenciesBAZ?github.com/bogi-lyceya-44/task-tracker/tasks;task_tracker_tasksb\x06proto3"
+	"\x12GetAllDependencies\x124.api.v1.task_tracker.tasks.GetAllDependenciesRequest\x1a5.api.v1.task_tracker.tasks.GetAllDependenciesResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/v1/get_all_dependenciesBQZOgithub.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks;task_tracker_tasksb\x06proto3"
 
 var (
 	file_api_tasks_services_proto_rawDescOnce sync.Once

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/bogi-lyceya-44/task-tracker/boards;task_tracker_boards";
+option go_package = "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/boards;task_tracker_boards";
 
 package api.v1.task_tracker.boards;
 

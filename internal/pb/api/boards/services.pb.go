@@ -11,6 +11,8 @@ import (
 	sync "sync"
 	unsafe "unsafe"
 
+	_ "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks"
+	topics "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -361,6 +363,386 @@ func (*DeleteBoardsResponse) Descriptor() ([]byte, []int) {
 	return file_api_boards_services_proto_rawDescGZIP(), []int{7}
 }
 
+type GetBoardContentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBoardContentRequest) Reset() {
+	*x = GetBoardContentRequest{}
+	mi := &file_api_boards_services_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBoardContentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBoardContentRequest) ProtoMessage() {}
+
+func (x *GetBoardContentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBoardContentRequest.ProtoReflect.Descriptor instead.
+func (*GetBoardContentRequest) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetBoardContentRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type GetBoardContentResponse struct {
+	state         protoimpl.MessageState                          `protogen:"open.v1"`
+	ContentById   map[int64]*GetBoardContentResponse_BoardContent `protobuf:"bytes,1,rep,name=content_by_id,json=contentById,proto3" json:"content_by_id,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBoardContentResponse) Reset() {
+	*x = GetBoardContentResponse{}
+	mi := &file_api_boards_services_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBoardContentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBoardContentResponse) ProtoMessage() {}
+
+func (x *GetBoardContentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBoardContentResponse.ProtoReflect.Descriptor instead.
+func (*GetBoardContentResponse) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetBoardContentResponse) GetContentById() map[int64]*GetBoardContentResponse_BoardContent {
+	if x != nil {
+		return x.ContentById
+	}
+	return nil
+}
+
+type GetAllBoardsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllBoardsRequest) Reset() {
+	*x = GetAllBoardsRequest{}
+	mi := &file_api_boards_services_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllBoardsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllBoardsRequest) ProtoMessage() {}
+
+func (x *GetAllBoardsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllBoardsRequest.ProtoReflect.Descriptor instead.
+func (*GetAllBoardsRequest) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{10}
+}
+
+type GetAllBoardsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Boards        []*Board               `protobuf:"bytes,1,rep,name=boards,proto3" json:"boards,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllBoardsResponse) Reset() {
+	*x = GetAllBoardsResponse{}
+	mi := &file_api_boards_services_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllBoardsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllBoardsResponse) ProtoMessage() {}
+
+func (x *GetAllBoardsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllBoardsResponse.ProtoReflect.Descriptor instead.
+func (*GetAllBoardsResponse) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetAllBoardsResponse) GetBoards() []*Board {
+	if x != nil {
+		return x.Boards
+	}
+	return nil
+}
+
+type BoardOrder struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BoardId       int64                  `protobuf:"varint,1,opt,name=board_id,json=boardId,proto3" json:"board_id,omitempty"`
+	Place         int32                  `protobuf:"varint,2,opt,name=place,proto3" json:"place,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BoardOrder) Reset() {
+	*x = BoardOrder{}
+	mi := &file_api_boards_services_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BoardOrder) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BoardOrder) ProtoMessage() {}
+
+func (x *BoardOrder) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BoardOrder.ProtoReflect.Descriptor instead.
+func (*BoardOrder) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *BoardOrder) GetBoardId() int64 {
+	if x != nil {
+		return x.BoardId
+	}
+	return 0
+}
+
+func (x *BoardOrder) GetPlace() int32 {
+	if x != nil {
+		return x.Place
+	}
+	return 0
+}
+
+type ChangeBoardOrderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Changes       []*BoardOrder          `protobuf:"bytes,1,rep,name=changes,proto3" json:"changes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeBoardOrderRequest) Reset() {
+	*x = ChangeBoardOrderRequest{}
+	mi := &file_api_boards_services_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeBoardOrderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeBoardOrderRequest) ProtoMessage() {}
+
+func (x *ChangeBoardOrderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeBoardOrderRequest.ProtoReflect.Descriptor instead.
+func (*ChangeBoardOrderRequest) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ChangeBoardOrderRequest) GetChanges() []*BoardOrder {
+	if x != nil {
+		return x.Changes
+	}
+	return nil
+}
+
+type ChangeBoardOrderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeBoardOrderResponse) Reset() {
+	*x = ChangeBoardOrderResponse{}
+	mi := &file_api_boards_services_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeBoardOrderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeBoardOrderResponse) ProtoMessage() {}
+
+func (x *ChangeBoardOrderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeBoardOrderResponse.ProtoReflect.Descriptor instead.
+func (*ChangeBoardOrderResponse) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{14}
+}
+
+type GetBoardOrderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBoardOrderRequest) Reset() {
+	*x = GetBoardOrderRequest{}
+	mi := &file_api_boards_services_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBoardOrderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBoardOrderRequest) ProtoMessage() {}
+
+func (x *GetBoardOrderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBoardOrderRequest.ProtoReflect.Descriptor instead.
+func (*GetBoardOrderRequest) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{15}
+}
+
+type GetBoardOrderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Order         map[int64]int32        `protobuf:"bytes,1,rep,name=order,proto3" json:"order,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBoardOrderResponse) Reset() {
+	*x = GetBoardOrderResponse{}
+	mi := &file_api_boards_services_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBoardOrderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBoardOrderResponse) ProtoMessage() {}
+
+func (x *GetBoardOrderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBoardOrderResponse.ProtoReflect.Descriptor instead.
+func (*GetBoardOrderResponse) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetBoardOrderResponse) GetOrder() map[int64]int32 {
+	if x != nil {
+		return x.Order
+	}
+	return nil
+}
+
 type CreateBoardsRequest_BoardPrototype struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -371,7 +753,7 @@ type CreateBoardsRequest_BoardPrototype struct {
 
 func (x *CreateBoardsRequest_BoardPrototype) Reset() {
 	*x = CreateBoardsRequest_BoardPrototype{}
-	mi := &file_api_boards_services_proto_msgTypes[8]
+	mi := &file_api_boards_services_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -383,7 +765,7 @@ func (x *CreateBoardsRequest_BoardPrototype) String() string {
 func (*CreateBoardsRequest_BoardPrototype) ProtoMessage() {}
 
 func (x *CreateBoardsRequest_BoardPrototype) ProtoReflect() protoreflect.Message {
-	mi := &file_api_boards_services_proto_msgTypes[8]
+	mi := &file_api_boards_services_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -424,7 +806,7 @@ type UpdateBoardsRequest_BoardPrototype struct {
 
 func (x *UpdateBoardsRequest_BoardPrototype) Reset() {
 	*x = UpdateBoardsRequest_BoardPrototype{}
-	mi := &file_api_boards_services_proto_msgTypes[9]
+	mi := &file_api_boards_services_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -436,7 +818,7 @@ func (x *UpdateBoardsRequest_BoardPrototype) String() string {
 func (*UpdateBoardsRequest_BoardPrototype) ProtoMessage() {}
 
 func (x *UpdateBoardsRequest_BoardPrototype) ProtoReflect() protoreflect.Message {
-	mi := &file_api_boards_services_proto_msgTypes[9]
+	mi := &file_api_boards_services_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -473,11 +855,55 @@ func (x *UpdateBoardsRequest_BoardPrototype) GetTopicIds() []int64 {
 	return nil
 }
 
+type GetBoardContentResponse_BoardContent struct {
+	state         protoimpl.MessageState          `protogen:"open.v1"`
+	Topics        []*topics.TopicWithFetchedTasks `protobuf:"bytes,1,rep,name=topics,proto3" json:"topics,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBoardContentResponse_BoardContent) Reset() {
+	*x = GetBoardContentResponse_BoardContent{}
+	mi := &file_api_boards_services_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBoardContentResponse_BoardContent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBoardContentResponse_BoardContent) ProtoMessage() {}
+
+func (x *GetBoardContentResponse_BoardContent) ProtoReflect() protoreflect.Message {
+	mi := &file_api_boards_services_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBoardContentResponse_BoardContent.ProtoReflect.Descriptor instead.
+func (*GetBoardContentResponse_BoardContent) Descriptor() ([]byte, []int) {
+	return file_api_boards_services_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *GetBoardContentResponse_BoardContent) GetTopics() []*topics.TopicWithFetchedTasks {
+	if x != nil {
+		return x.Topics
+	}
+	return nil
+}
+
 var File_api_boards_services_proto protoreflect.FileDescriptor
 
 const file_api_boards_services_proto_rawDesc = "" +
 	"\n" +
-	"\x19api/boards/services.proto\x12\x1aapi.v1.task_tracker.boards\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x17api/boards/models.proto\".\n" +
+	"\x19api/boards/services.proto\x12\x1aapi.v1.task_tracker.boards\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\x1a\x17api/boards/models.proto\x1a\x16api/tasks/models.proto\x1a\x17api/topics/models.proto\".\n" +
 	"\x10GetBoardsRequest\x12\x1a\n" +
 	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"N\n" +
 	"\x11GetBoardsResponse\x129\n" +
@@ -499,12 +925,42 @@ const file_api_boards_services_proto_rawDesc = "" +
 	"\x14UpdateBoardsResponse\"1\n" +
 	"\x13DeleteBoardsRequest\x12\x1a\n" +
 	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"\x16\n" +
-	"\x14DeleteBoardsResponse2\xda\x04\n" +
+	"\x14DeleteBoardsResponse\"4\n" +
+	"\x16GetBoardContentRequest\x12\x1a\n" +
+	"\x03ids\x18\x01 \x03(\x03B\b\xfaB\x05\x92\x01\x02\b\x01R\x03ids\"\xe1\x02\n" +
+	"\x17GetBoardContentResponse\x12h\n" +
+	"\rcontent_by_id\x18\x01 \x03(\v2D.api.v1.task_tracker.boards.GetBoardContentResponse.ContentByIdEntryR\vcontentById\x1aY\n" +
+	"\fBoardContent\x12I\n" +
+	"\x06topics\x18\x01 \x03(\v21.api.v1.task_tracker.topics.TopicWithFetchedTasksR\x06topics\x1a\x80\x01\n" +
+	"\x10ContentByIdEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x03R\x03key\x12V\n" +
+	"\x05value\x18\x02 \x01(\v2@.api.v1.task_tracker.boards.GetBoardContentResponse.BoardContentR\x05value:\x028\x01\"\x15\n" +
+	"\x13GetAllBoardsRequest\"Q\n" +
+	"\x14GetAllBoardsResponse\x129\n" +
+	"\x06boards\x18\x01 \x03(\v2!.api.v1.task_tracker.boards.BoardR\x06boards\"F\n" +
+	"\n" +
+	"BoardOrder\x12\x19\n" +
+	"\bboard_id\x18\x01 \x01(\x03R\aboardId\x12\x1d\n" +
+	"\x05place\x18\x02 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\x05place\"e\n" +
+	"\x17ChangeBoardOrderRequest\x12J\n" +
+	"\achanges\x18\x01 \x03(\v2&.api.v1.task_tracker.boards.BoardOrderB\b\xfaB\x05\x92\x01\x02\b\x01R\achanges\"\x1a\n" +
+	"\x18ChangeBoardOrderResponse\"\x16\n" +
+	"\x14GetBoardOrderRequest\"\xa5\x01\n" +
+	"\x15GetBoardOrderResponse\x12R\n" +
+	"\x05order\x18\x01 \x03(\v2<.api.v1.task_tracker.boards.GetBoardOrderResponse.OrderEntryR\x05order\x1a8\n" +
+	"\n" +
+	"OrderEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x03R\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x012\xd6\t\n" +
 	"\fBoardService\x12\x87\x01\n" +
 	"\tGetBoards\x12,.api.v1.task_tracker.boards.GetBoardsRequest\x1a-.api.v1.task_tracker.boards.GetBoardsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/get_boards\x12\x93\x01\n" +
 	"\fCreateBoards\x12/.api.v1.task_tracker.boards.CreateBoardsRequest\x1a0.api.v1.task_tracker.boards.CreateBoardsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/create_boards\x12\x93\x01\n" +
 	"\fUpdateBoards\x12/.api.v1.task_tracker.boards.UpdateBoardsRequest\x1a0.api.v1.task_tracker.boards.UpdateBoardsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/update_boards\x12\x93\x01\n" +
-	"\fDeleteBoards\x12/.api.v1.task_tracker.boards.DeleteBoardsRequest\x1a0.api.v1.task_tracker.boards.DeleteBoardsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/delete_boardsBCZAgithub.com/bogi-lyceya-44/task-tracker/boards;task_tracker_boardsb\x06proto3"
+	"\fDeleteBoards\x12/.api.v1.task_tracker.boards.DeleteBoardsRequest\x1a0.api.v1.task_tracker.boards.DeleteBoardsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/delete_boards\x12\xa0\x01\n" +
+	"\x0fGetBoardContent\x122.api.v1.task_tracker.boards.GetBoardContentRequest\x1a3.api.v1.task_tracker.boards.GetBoardContentResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/v1/get_board_content\x12\x94\x01\n" +
+	"\fGetAllBoards\x12/.api.v1.task_tracker.boards.GetAllBoardsRequest\x1a0.api.v1.task_tracker.boards.GetAllBoardsResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/v1/get_all_boards\x12\x98\x01\n" +
+	"\rGetBoardOrder\x120.api.v1.task_tracker.boards.GetBoardOrderRequest\x1a1.api.v1.task_tracker.boards.GetBoardOrderResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/get_board_order\x12\xa4\x01\n" +
+	"\x10ChangeBoardOrder\x123.api.v1.task_tracker.boards.ChangeBoardOrderRequest\x1a4.api.v1.task_tracker.boards.ChangeBoardOrderResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/v1/change_board_orderBSZQgithub.com/bogi-lyceya-44/task-tracker/internal/pb/api/boards;task_tracker_boardsb\x06proto3"
 
 var (
 	file_api_boards_services_proto_rawDescOnce sync.Once
@@ -518,37 +974,64 @@ func file_api_boards_services_proto_rawDescGZIP() []byte {
 	return file_api_boards_services_proto_rawDescData
 }
 
-var file_api_boards_services_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_api_boards_services_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_api_boards_services_proto_goTypes = []any{
-	(*GetBoardsRequest)(nil),                   // 0: api.v1.task_tracker.boards.GetBoardsRequest
-	(*GetBoardsResponse)(nil),                  // 1: api.v1.task_tracker.boards.GetBoardsResponse
-	(*CreateBoardsRequest)(nil),                // 2: api.v1.task_tracker.boards.CreateBoardsRequest
-	(*CreateBoardsResponse)(nil),               // 3: api.v1.task_tracker.boards.CreateBoardsResponse
-	(*UpdateBoardsRequest)(nil),                // 4: api.v1.task_tracker.boards.UpdateBoardsRequest
-	(*UpdateBoardsResponse)(nil),               // 5: api.v1.task_tracker.boards.UpdateBoardsResponse
-	(*DeleteBoardsRequest)(nil),                // 6: api.v1.task_tracker.boards.DeleteBoardsRequest
-	(*DeleteBoardsResponse)(nil),               // 7: api.v1.task_tracker.boards.DeleteBoardsResponse
-	(*CreateBoardsRequest_BoardPrototype)(nil), // 8: api.v1.task_tracker.boards.CreateBoardsRequest.BoardPrototype
-	(*UpdateBoardsRequest_BoardPrototype)(nil), // 9: api.v1.task_tracker.boards.UpdateBoardsRequest.BoardPrototype
-	(*Board)(nil),                              // 10: api.v1.task_tracker.boards.Board
+	(*GetBoardsRequest)(nil),                     // 0: api.v1.task_tracker.boards.GetBoardsRequest
+	(*GetBoardsResponse)(nil),                    // 1: api.v1.task_tracker.boards.GetBoardsResponse
+	(*CreateBoardsRequest)(nil),                  // 2: api.v1.task_tracker.boards.CreateBoardsRequest
+	(*CreateBoardsResponse)(nil),                 // 3: api.v1.task_tracker.boards.CreateBoardsResponse
+	(*UpdateBoardsRequest)(nil),                  // 4: api.v1.task_tracker.boards.UpdateBoardsRequest
+	(*UpdateBoardsResponse)(nil),                 // 5: api.v1.task_tracker.boards.UpdateBoardsResponse
+	(*DeleteBoardsRequest)(nil),                  // 6: api.v1.task_tracker.boards.DeleteBoardsRequest
+	(*DeleteBoardsResponse)(nil),                 // 7: api.v1.task_tracker.boards.DeleteBoardsResponse
+	(*GetBoardContentRequest)(nil),               // 8: api.v1.task_tracker.boards.GetBoardContentRequest
+	(*GetBoardContentResponse)(nil),              // 9: api.v1.task_tracker.boards.GetBoardContentResponse
+	(*GetAllBoardsRequest)(nil),                  // 10: api.v1.task_tracker.boards.GetAllBoardsRequest
+	(*GetAllBoardsResponse)(nil),                 // 11: api.v1.task_tracker.boards.GetAllBoardsResponse
+	(*BoardOrder)(nil),                           // 12: api.v1.task_tracker.boards.BoardOrder
+	(*ChangeBoardOrderRequest)(nil),              // 13: api.v1.task_tracker.boards.ChangeBoardOrderRequest
+	(*ChangeBoardOrderResponse)(nil),             // 14: api.v1.task_tracker.boards.ChangeBoardOrderResponse
+	(*GetBoardOrderRequest)(nil),                 // 15: api.v1.task_tracker.boards.GetBoardOrderRequest
+	(*GetBoardOrderResponse)(nil),                // 16: api.v1.task_tracker.boards.GetBoardOrderResponse
+	(*CreateBoardsRequest_BoardPrototype)(nil),   // 17: api.v1.task_tracker.boards.CreateBoardsRequest.BoardPrototype
+	(*UpdateBoardsRequest_BoardPrototype)(nil),   // 18: api.v1.task_tracker.boards.UpdateBoardsRequest.BoardPrototype
+	(*GetBoardContentResponse_BoardContent)(nil), // 19: api.v1.task_tracker.boards.GetBoardContentResponse.BoardContent
+	nil,                                  // 20: api.v1.task_tracker.boards.GetBoardContentResponse.ContentByIdEntry
+	nil,                                  // 21: api.v1.task_tracker.boards.GetBoardOrderResponse.OrderEntry
+	(*Board)(nil),                        // 22: api.v1.task_tracker.boards.Board
+	(*topics.TopicWithFetchedTasks)(nil), // 23: api.v1.task_tracker.topics.TopicWithFetchedTasks
 }
 var file_api_boards_services_proto_depIdxs = []int32{
-	10, // 0: api.v1.task_tracker.boards.GetBoardsResponse.boards:type_name -> api.v1.task_tracker.boards.Board
-	8,  // 1: api.v1.task_tracker.boards.CreateBoardsRequest.boards_to_create:type_name -> api.v1.task_tracker.boards.CreateBoardsRequest.BoardPrototype
-	9,  // 2: api.v1.task_tracker.boards.UpdateBoardsRequest.boards_to_update:type_name -> api.v1.task_tracker.boards.UpdateBoardsRequest.BoardPrototype
-	0,  // 3: api.v1.task_tracker.boards.BoardService.GetBoards:input_type -> api.v1.task_tracker.boards.GetBoardsRequest
-	2,  // 4: api.v1.task_tracker.boards.BoardService.CreateBoards:input_type -> api.v1.task_tracker.boards.CreateBoardsRequest
-	4,  // 5: api.v1.task_tracker.boards.BoardService.UpdateBoards:input_type -> api.v1.task_tracker.boards.UpdateBoardsRequest
-	6,  // 6: api.v1.task_tracker.boards.BoardService.DeleteBoards:input_type -> api.v1.task_tracker.boards.DeleteBoardsRequest
-	1,  // 7: api.v1.task_tracker.boards.BoardService.GetBoards:output_type -> api.v1.task_tracker.boards.GetBoardsResponse
-	3,  // 8: api.v1.task_tracker.boards.BoardService.CreateBoards:output_type -> api.v1.task_tracker.boards.CreateBoardsResponse
-	5,  // 9: api.v1.task_tracker.boards.BoardService.UpdateBoards:output_type -> api.v1.task_tracker.boards.UpdateBoardsResponse
-	7,  // 10: api.v1.task_tracker.boards.BoardService.DeleteBoards:output_type -> api.v1.task_tracker.boards.DeleteBoardsResponse
-	7,  // [7:11] is the sub-list for method output_type
-	3,  // [3:7] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	22, // 0: api.v1.task_tracker.boards.GetBoardsResponse.boards:type_name -> api.v1.task_tracker.boards.Board
+	17, // 1: api.v1.task_tracker.boards.CreateBoardsRequest.boards_to_create:type_name -> api.v1.task_tracker.boards.CreateBoardsRequest.BoardPrototype
+	18, // 2: api.v1.task_tracker.boards.UpdateBoardsRequest.boards_to_update:type_name -> api.v1.task_tracker.boards.UpdateBoardsRequest.BoardPrototype
+	20, // 3: api.v1.task_tracker.boards.GetBoardContentResponse.content_by_id:type_name -> api.v1.task_tracker.boards.GetBoardContentResponse.ContentByIdEntry
+	22, // 4: api.v1.task_tracker.boards.GetAllBoardsResponse.boards:type_name -> api.v1.task_tracker.boards.Board
+	12, // 5: api.v1.task_tracker.boards.ChangeBoardOrderRequest.changes:type_name -> api.v1.task_tracker.boards.BoardOrder
+	21, // 6: api.v1.task_tracker.boards.GetBoardOrderResponse.order:type_name -> api.v1.task_tracker.boards.GetBoardOrderResponse.OrderEntry
+	23, // 7: api.v1.task_tracker.boards.GetBoardContentResponse.BoardContent.topics:type_name -> api.v1.task_tracker.topics.TopicWithFetchedTasks
+	19, // 8: api.v1.task_tracker.boards.GetBoardContentResponse.ContentByIdEntry.value:type_name -> api.v1.task_tracker.boards.GetBoardContentResponse.BoardContent
+	0,  // 9: api.v1.task_tracker.boards.BoardService.GetBoards:input_type -> api.v1.task_tracker.boards.GetBoardsRequest
+	2,  // 10: api.v1.task_tracker.boards.BoardService.CreateBoards:input_type -> api.v1.task_tracker.boards.CreateBoardsRequest
+	4,  // 11: api.v1.task_tracker.boards.BoardService.UpdateBoards:input_type -> api.v1.task_tracker.boards.UpdateBoardsRequest
+	6,  // 12: api.v1.task_tracker.boards.BoardService.DeleteBoards:input_type -> api.v1.task_tracker.boards.DeleteBoardsRequest
+	8,  // 13: api.v1.task_tracker.boards.BoardService.GetBoardContent:input_type -> api.v1.task_tracker.boards.GetBoardContentRequest
+	10, // 14: api.v1.task_tracker.boards.BoardService.GetAllBoards:input_type -> api.v1.task_tracker.boards.GetAllBoardsRequest
+	15, // 15: api.v1.task_tracker.boards.BoardService.GetBoardOrder:input_type -> api.v1.task_tracker.boards.GetBoardOrderRequest
+	13, // 16: api.v1.task_tracker.boards.BoardService.ChangeBoardOrder:input_type -> api.v1.task_tracker.boards.ChangeBoardOrderRequest
+	1,  // 17: api.v1.task_tracker.boards.BoardService.GetBoards:output_type -> api.v1.task_tracker.boards.GetBoardsResponse
+	3,  // 18: api.v1.task_tracker.boards.BoardService.CreateBoards:output_type -> api.v1.task_tracker.boards.CreateBoardsResponse
+	5,  // 19: api.v1.task_tracker.boards.BoardService.UpdateBoards:output_type -> api.v1.task_tracker.boards.UpdateBoardsResponse
+	7,  // 20: api.v1.task_tracker.boards.BoardService.DeleteBoards:output_type -> api.v1.task_tracker.boards.DeleteBoardsResponse
+	9,  // 21: api.v1.task_tracker.boards.BoardService.GetBoardContent:output_type -> api.v1.task_tracker.boards.GetBoardContentResponse
+	11, // 22: api.v1.task_tracker.boards.BoardService.GetAllBoards:output_type -> api.v1.task_tracker.boards.GetAllBoardsResponse
+	16, // 23: api.v1.task_tracker.boards.BoardService.GetBoardOrder:output_type -> api.v1.task_tracker.boards.GetBoardOrderResponse
+	14, // 24: api.v1.task_tracker.boards.BoardService.ChangeBoardOrder:output_type -> api.v1.task_tracker.boards.ChangeBoardOrderResponse
+	17, // [17:25] is the sub-list for method output_type
+	9,  // [9:17] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_api_boards_services_proto_init() }
@@ -557,14 +1040,14 @@ func file_api_boards_services_proto_init() {
 		return
 	}
 	file_api_boards_models_proto_init()
-	file_api_boards_services_proto_msgTypes[9].OneofWrappers = []any{}
+	file_api_boards_services_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_boards_services_proto_rawDesc), len(file_api_boards_services_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
