@@ -111,7 +111,7 @@ const file_api_boards_models_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBCZAgithub.com/bogi-lyceya-44/task-tracker/boards;task_tracker_boardsb\x06proto3"
+	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBSZQgithub.com/bogi-lyceya-44/task-tracker/internal/pb/api/boards;task_tracker_boardsb\x06proto3"
 
 var (
 	file_api_boards_models_proto_rawDescOnce sync.Once

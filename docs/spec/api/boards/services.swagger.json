@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/change_board_order": {
+      "post": {
+        "operationId": "BoardService_ChangeBoardOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/boardsChangeBoardOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/boardsChangeBoardOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BoardService"
+        ]
+      }
+    },
     "/api/v1/create_boards": {
       "post": {
         "operationId": "BoardService_CreateBoards",
@@ -72,6 +104,102 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/boardsDeleteBoardsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BoardService"
+        ]
+      }
+    },
+    "/api/v1/get_all_boards": {
+      "post": {
+        "operationId": "BoardService_GetAllBoards",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/boardsGetAllBoardsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/boardsGetAllBoardsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BoardService"
+        ]
+      }
+    },
+    "/api/v1/get_board_content": {
+      "post": {
+        "operationId": "BoardService_GetBoardContent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/boardsGetBoardContentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/boardsGetBoardContentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BoardService"
+        ]
+      }
+    },
+    "/api/v1/get_board_order": {
+      "post": {
+        "operationId": "BoardService_GetBoardOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/boardsGetBoardOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/boardsGetBoardOrderRequest"
             }
           }
         ],
@@ -146,6 +274,18 @@
     }
   },
   "definitions": {
+    "GetBoardContentResponseBoardContent": {
+      "type": "object",
+      "properties": {
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/topicsTopicWithFetchedTasks"
+          }
+        }
+      }
+    },
     "boardsBoard": {
       "type": "object",
       "properties": {
@@ -172,6 +312,34 @@
           "format": "date-time"
         }
       }
+    },
+    "boardsBoardOrder": {
+      "type": "object",
+      "properties": {
+        "boardId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "place": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "boardsChangeBoardOrderRequest": {
+      "type": "object",
+      "properties": {
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/boardsBoardOrder"
+          }
+        }
+      }
+    },
+    "boardsChangeBoardOrderResponse": {
+      "type": "object"
     },
     "boardsCreateBoardsRequest": {
       "type": "object",
@@ -226,6 +394,59 @@
     },
     "boardsDeleteBoardsResponse": {
       "type": "object"
+    },
+    "boardsGetAllBoardsRequest": {
+      "type": "object"
+    },
+    "boardsGetAllBoardsResponse": {
+      "type": "object",
+      "properties": {
+        "boards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/boardsBoard"
+          }
+        }
+      }
+    },
+    "boardsGetBoardContentRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "boardsGetBoardContentResponse": {
+      "type": "object",
+      "properties": {
+        "contentById": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GetBoardContentResponseBoardContent"
+          }
+        }
+      }
+    },
+    "boardsGetBoardOrderRequest": {
+      "type": "object"
+    },
+    "boardsGetBoardOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
     },
     "boardsGetBoardsRequest": {
       "type": "object",
@@ -310,6 +531,85 @@
             "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "tasksPriority": {
+      "type": "string",
+      "enum": [
+        "PRIORITY_UNSPECIFIED",
+        "PRIORITY_LOW",
+        "PRIORITY_MEDIUM",
+        "PRIORITY_HIGH",
+        "PRIORITY_CRITICAL"
+      ],
+      "default": "PRIORITY_UNSPECIFIED"
+    },
+    "tasksTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "deps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "priority": {
+          "$ref": "#/definitions/tasksPriority"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "topicsTopicWithFetchedTasks": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/tasksTask"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     }

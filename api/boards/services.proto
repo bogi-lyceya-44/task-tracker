@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/bogi-lyceya-44/task-tracker/boards;task_tracker_boards";
+option go_package = "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/boards;task_tracker_boards";
 
 package api.v1.task_tracker.boards;
 
@@ -8,6 +8,8 @@ import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 import "api/boards/models.proto";
+import "api/tasks/models.proto";
+import "api/topics/models.proto";
 
 service BoardService {
     rpc GetBoards(GetBoardsRequest) returns (GetBoardsResponse) {
@@ -34,6 +36,36 @@ service BoardService {
     rpc DeleteBoards(DeleteBoardsRequest) returns (DeleteBoardsResponse) {
         option (google.api.http) = {
             post: "/api/v1/delete_boards"
+            body: "*"
+        };
+    }
+
+    rpc GetBoardContent(GetBoardContentRequest)
+        returns (GetBoardContentResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_board_content"
+            body: "*"
+        };
+    }
+
+    rpc GetAllBoards(GetAllBoardsRequest) returns (GetAllBoardsResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_all_boards"
+            body: "*"
+        };
+    }
+
+    rpc GetBoardOrder(GetBoardOrderRequest) returns (GetBoardOrderResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/get_board_order"
+            body: "*"
+        };
+    }
+
+    rpc ChangeBoardOrder(ChangeBoardOrderRequest)
+        returns (ChangeBoardOrderResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/change_board_order"
             body: "*"
         };
     }
@@ -79,3 +111,38 @@ message DeleteBoardsRequest {
 }
 
 message DeleteBoardsResponse {}
+
+message GetBoardContentRequest {
+    repeated int64 ids = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message GetBoardContentResponse {
+    message BoardContent {
+        repeated api.v1.task_tracker.topics.TopicWithFetchedTasks topics = 1;
+    }
+
+    map<int64, BoardContent> content_by_id = 1;
+}
+
+message GetAllBoardsRequest {}
+
+message GetAllBoardsResponse {
+    repeated Board boards = 1;
+}
+
+message BoardOrder {
+    int64 board_id = 1;
+    int32 place = 2 [(validate.rules).int32.gt = 0];
+}
+
+message ChangeBoardOrderRequest {
+    repeated BoardOrder changes = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message ChangeBoardOrderResponse {}
+
+message GetBoardOrderRequest {}
+
+message GetBoardOrderResponse {
+    map<int64, int32> order = 1;
+}

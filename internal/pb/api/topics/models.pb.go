@@ -11,6 +11,7 @@ import (
 	sync "sync"
 	unsafe "unsafe"
 
+	tasks "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -99,11 +100,87 @@ func (x *Topic) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type TopicWithFetchedTasks struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Tasks         []*tasks.Task          `protobuf:"bytes,3,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TopicWithFetchedTasks) Reset() {
+	*x = TopicWithFetchedTasks{}
+	mi := &file_api_topics_models_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopicWithFetchedTasks) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopicWithFetchedTasks) ProtoMessage() {}
+
+func (x *TopicWithFetchedTasks) ProtoReflect() protoreflect.Message {
+	mi := &file_api_topics_models_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopicWithFetchedTasks.ProtoReflect.Descriptor instead.
+func (*TopicWithFetchedTasks) Descriptor() ([]byte, []int) {
+	return file_api_topics_models_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *TopicWithFetchedTasks) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *TopicWithFetchedTasks) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *TopicWithFetchedTasks) GetTasks() []*tasks.Task {
+	if x != nil {
+		return x.Tasks
+	}
+	return nil
+}
+
+func (x *TopicWithFetchedTasks) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *TopicWithFetchedTasks) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
 var File_api_topics_models_proto protoreflect.FileDescriptor
 
 const file_api_topics_models_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/topics/models.proto\x12\x1aapi.v1.task_tracker.topics\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbc\x01\n" +
+	"\x17api/topics/models.proto\x12\x1aapi.v1.task_tracker.topics\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16api/tasks/models.proto\"\xbc\x01\n" +
 	"\x05Topic\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
@@ -111,7 +188,15 @@ const file_api_topics_models_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBCZAgithub.com/bogi-lyceya-44/task-tracker/topics;task_tracker_topicsb\x06proto3"
+	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xe8\x01\n" +
+	"\x15TopicWithFetchedTasks\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x125\n" +
+	"\x05tasks\x18\x03 \x03(\v2\x1f.api.v1.task_tracker.tasks.TaskR\x05tasks\x129\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBSZQgithub.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics;task_tracker_topicsb\x06proto3"
 
 var (
 	file_api_topics_models_proto_rawDescOnce sync.Once
@@ -125,19 +210,24 @@ func file_api_topics_models_proto_rawDescGZIP() []byte {
 	return file_api_topics_models_proto_rawDescData
 }
 
-var file_api_topics_models_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_api_topics_models_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_api_topics_models_proto_goTypes = []any{
 	(*Topic)(nil),                 // 0: api.v1.task_tracker.topics.Topic
-	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
+	(*TopicWithFetchedTasks)(nil), // 1: api.v1.task_tracker.topics.TopicWithFetchedTasks
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
+	(*tasks.Task)(nil),            // 3: api.v1.task_tracker.tasks.Task
 }
 var file_api_topics_models_proto_depIdxs = []int32{
-	1, // 0: api.v1.task_tracker.topics.Topic.created_at:type_name -> google.protobuf.Timestamp
-	1, // 1: api.v1.task_tracker.topics.Topic.updated_at:type_name -> google.protobuf.Timestamp
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	2, // 0: api.v1.task_tracker.topics.Topic.created_at:type_name -> google.protobuf.Timestamp
+	2, // 1: api.v1.task_tracker.topics.Topic.updated_at:type_name -> google.protobuf.Timestamp
+	3, // 2: api.v1.task_tracker.topics.TopicWithFetchedTasks.tasks:type_name -> api.v1.task_tracker.tasks.Task
+	2, // 3: api.v1.task_tracker.topics.TopicWithFetchedTasks.created_at:type_name -> google.protobuf.Timestamp
+	2, // 4: api.v1.task_tracker.topics.TopicWithFetchedTasks.updated_at:type_name -> google.protobuf.Timestamp
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_topics_models_proto_init() }
@@ -151,7 +241,7 @@ func file_api_topics_models_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_topics_models_proto_rawDesc), len(file_api_topics_models_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
