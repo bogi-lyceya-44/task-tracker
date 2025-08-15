@@ -80,7 +80,7 @@ func (app *App) Run(ctx context.Context) error {
 
 	httpServer := http.Server{
 		Addr:    app.gatewayAddr,
-		Handler: app.mux,
+		Handler: corsMiddleware(app.mux),
 	}
 
 	eg.Go(func() error {
@@ -129,4 +129,22 @@ func (app *App) Run(ctx context.Context) error {
 	<-ctx.Done()
 
 	return err
+}
+
+// allows any requests
+// WARN: bad for production
+func corsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "*")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
 }
