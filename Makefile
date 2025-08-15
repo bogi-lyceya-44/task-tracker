@@ -106,3 +106,7 @@ pg-down: .pgdown
 migrate: .migrate
 .migrate:
 	goose -dir migrations postgres "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable" up
+
+release: .release
+.release:
+	./scripts/git/release.sh
