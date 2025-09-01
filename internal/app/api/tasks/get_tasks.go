@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/bogi-lyceya-44/common/pkg/utils"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/tasks"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

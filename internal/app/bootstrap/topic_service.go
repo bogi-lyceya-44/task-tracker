@@ -7,7 +7,7 @@ import (
 	topics_service "github.com/bogi-lyceya-44/task-tracker/internal/app/services/topics"
 	tasks_storage "github.com/bogi-lyceya-44/task-tracker/internal/app/storages/tasks"
 	topics_storage "github.com/bogi-lyceya-44/task-tracker/internal/app/storages/topics"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/topics"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bogi-lyceya-44/task-tracker/internal/app/models"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/tasks"
 	"github.com/pkg/errors"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )

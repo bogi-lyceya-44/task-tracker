@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/bogi-lyceya-44/task-tracker/internal/app/models"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/tasks"
 )
 
 type TaskService interface {

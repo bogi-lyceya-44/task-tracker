@@ -3,7 +3,7 @@ package topics
 import (
 	"context"
 
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/topics"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

@@ -2,7 +2,7 @@ package boards
 
 import (
 	"github.com/bogi-lyceya-44/task-tracker/internal/app/models"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/boards"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/boards"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
