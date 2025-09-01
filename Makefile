@@ -6,7 +6,7 @@ GO_TEST=$(LOCAL_BIN)/gotest
 GO_TEST_ARGS=-race -v ./...
 UNAME_S := $(shell uname -s)
 UNAME_P := $(shell uname -p)
-GENERATED_DIR = internal/pb
+GENERATED_DIR = pkg/pb
 
 ARCH :=
 
@@ -77,7 +77,7 @@ fast-generate: .generate
 	$(info Generating code...)
 
 	rm -rf ./$(GENERATED_DIR)
-	mkdir ./$(GENERATED_DIR)
+	mkdir -p ./$(GENERATED_DIR)
 
 	rm -rf ./docs/spec
 	mkdir -p ./docs/spec

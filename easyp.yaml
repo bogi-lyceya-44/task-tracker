@@ -17,16 +17,11 @@ generate:
     - directory: ./api
   plugins:
     - name: go
-      out: ./internal/pb
+      out: ./pkg/pb
       opts:
         paths: source_relative
-    # - name: go-grpc
-    #   out: ./internal/pb
-    #   opts:
-    #     paths: source_relative
-    #     require_unimplemented_servers: false
     - name: grpc-gateway
-      out: ./internal/pb
+      out: ./pkg/pb
       opts:
         paths: source_relative
         generate_unbound_methods: true
@@ -35,13 +30,13 @@ generate:
       opts:
         generate_unbound_methods: true
     - name: validate
-      out: ./internal/pb
+      out: ./pkg/pb
       path: ./bin/protoc-gen-validate
       opts:
         paths: source_relative
         lang: go
     - name: go-vtproto
-      out: ./internal/pb
+      out: ./pkg/pb
       opts:
         paths: source_relative
 breaking:
