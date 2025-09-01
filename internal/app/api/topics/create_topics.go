@@ -6,7 +6,7 @@ import (
 
 	"github.com/bogi-lyceya-44/common/pkg/utils"
 	topics_service "github.com/bogi-lyceya-44/task-tracker/internal/app/services/topics"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/topics"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

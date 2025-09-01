@@ -5,7 +5,7 @@ import (
 
 	"github.com/bogi-lyceya-44/common/pkg/utils"
 	tasks_service "github.com/bogi-lyceya-44/task-tracker/internal/app/services/tasks"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/tasks"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

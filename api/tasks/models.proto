@@ -1,29 +1,29 @@
 syntax = "proto3";
 
-option go_package = "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/tasks;task_tracker_tasks";
+option go_package = "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/tasks;task_tracker_tasks";
 
 package api.v1.task_tracker.tasks;
 
 import "google/protobuf/timestamp.proto";
 
 message Task {
-    int64 id = 1;
-    string name = 2;
-    string description = 3;
-    repeated int64 deps = 4;
-    Priority priority = 5;
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  repeated int64 deps = 4;
+  Priority priority = 5;
 
-    google.protobuf.Timestamp start_time = 6;
-    google.protobuf.Timestamp finish_time = 7;
+  google.protobuf.Timestamp start_time = 6;
+  google.protobuf.Timestamp finish_time = 7;
 
-    google.protobuf.Timestamp created_at = 8;
-    google.protobuf.Timestamp updated_at = 9;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
 }
 
 enum Priority {
-    PRIORITY_UNSPECIFIED = 0;
-    PRIORITY_LOW = 1;
-    PRIORITY_MEDIUM = 2;
-    PRIORITY_HIGH = 3;
-    PRIORITY_CRITICAL = 4;
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;
+  PRIORITY_MEDIUM = 2;
+  PRIORITY_HIGH = 3;
+  PRIORITY_CRITICAL = 4;
 }

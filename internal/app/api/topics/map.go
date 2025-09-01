@@ -2,7 +2,7 @@ package topics
 
 import (
 	"github.com/bogi-lyceya-44/task-tracker/internal/app/models"
-	desc "github.com/bogi-lyceya-44/task-tracker/internal/pb/api/topics"
+	desc "github.com/bogi-lyceya-44/task-tracker/pkg/pb/api/topics"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
